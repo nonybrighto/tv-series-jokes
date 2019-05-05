@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "103860374416",
+    "firebase_url": "https://tv-series-jokes.firebaseio.com",
+    "project_id": "tv-series-jokes",
+    "storage_bucket": "tv-series-jokes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103860374416:android:d2da0081b7f4afdc",
+        "android_client_info": {
+          "package_name": "com.nonybrighto.tv_series_jokes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103860374416-hvrjim0aurttf4u69i5eupkp8s1d3l2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nonybrighto.tv_series_jokes",
+            "certificate_hash": "cccee93a21464bb31b2d2780cda1c30870e32520"
+          }
+        },
+        {
+          "client_id": "103860374416-75hb55t2npugs56t6ih0rsnsg2mabe4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEukPWQARL5leomLZuf8g10wrLhfc-tAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103860374416-75hb55t2npugs56t6ih0rsnsg2mabe4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
