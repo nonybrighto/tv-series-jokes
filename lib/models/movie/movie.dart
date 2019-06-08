@@ -11,7 +11,7 @@ abstract class Movie implements Built<Movie, MovieBuilder> {
 
   static Serializer<Movie> get serializer => _$movieSerializer;
 
-  String get id;
+  int get id;
   String get name;
   int get tmdbMovieId;
   @nullable

@@ -19,7 +19,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'username',
       serializers.serialize(object.username,
           specifiedType: const FullType(String)),
@@ -83,7 +83,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(int)) as int;
           break;
         case 'username':
           result.username = serializers.deserialize(value,
@@ -126,7 +126,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
 
 class _$User extends User {
   @override
-  final String id;
+  final int id;
   @override
   final String username;
   @override
@@ -225,9 +225,9 @@ class _$User extends User {
 class UserBuilder implements Builder<User, UserBuilder> {
   _$User _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
 
   String _username;
   String get username => _$this._username;

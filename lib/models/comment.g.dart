@@ -19,7 +19,7 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'content',
       serializers.serialize(object.content,
           specifiedType: const FullType(String)),
@@ -56,7 +56,7 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(int)) as int;
           break;
         case 'content':
           result.content = serializers.deserialize(value,
@@ -83,7 +83,7 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
 
 class _$Comment extends Comment {
   @override
-  final String id;
+  final int id;
   @override
   final String content;
   @override
@@ -153,9 +153,9 @@ class _$Comment extends Comment {
 class CommentBuilder implements Builder<Comment, CommentBuilder> {
   _$Comment _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
 
   String _content;
   String get content => _$this._content;

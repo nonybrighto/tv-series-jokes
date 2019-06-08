@@ -19,7 +19,7 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
@@ -85,7 +85,7 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(int)) as int;
           break;
         case 'title':
           result.title = serializers.deserialize(value,
@@ -136,7 +136,7 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
 
 class _$Joke extends Joke {
   @override
-  final String id;
+  final int id;
   @override
   final String title;
   @override
@@ -260,9 +260,9 @@ class _$Joke extends Joke {
 class JokeBuilder implements Builder<Joke, JokeBuilder> {
   _$Joke _$v;
 
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
 
   String _title;
   String get title => _$this._title;

@@ -16,7 +16,7 @@ abstract class Joke implements Built<Joke, JokeBuilder> {
   /// to do this for every type you want to serialize.
   static Serializer<Joke> get serializer => _$jokeSerializer;
 
-  String get id;
+  int get id;
   String get title;
   @nullable
   String get text;

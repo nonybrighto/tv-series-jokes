@@ -83,7 +83,7 @@ class JokeControlBloc extends BlocBase {
 
     Function(String) saveCallback = details['saveCallback'];
     try {
-      await JokeSaveUtil().saveImage(jokeControlled.imageUrl, jokeControlled.id,
+      await JokeSaveUtil().saveImage(jokeControlled.imageUrl, jokeControlled.title,
           jokeControlled.getImageExtension());
       saveCallback('Joke has been saved!!');
     } catch (err) {
@@ -99,7 +99,7 @@ class JokeControlBloc extends BlocBase {
 
     Function(String) saveCallback = details['saveCallback'];
     try {
-      await JokeSaveUtil().saveText(jokeImage, jokeControlled.id);
+      await JokeSaveUtil().saveText(jokeImage, jokeControlled.title);
       saveCallback('Joke has been saved!!');
     } catch (err) {
       saveCallback('Failed to save joke!!');

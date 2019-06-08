@@ -148,7 +148,7 @@ class AuthService {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString(kUserJwtTokenPrefKey, userJwtToken);
     pref.setString(kUserJwtTokenExpiresPrefKey, tokenExpires);
-    pref.setString(kUserIdPrefKey, user.id);
+    pref.setInt(kUserIdPrefKey, user.id);
     pref.setString(kUsernamePrefKey, user.username);
     pref.setString(kUserEmailPrefKey, user.email);
     pref.setString(kUserPhotoUrlPrefKey, user.photoUrl);
@@ -183,7 +183,7 @@ class AuthService {
             DateTime tokenExpireDate =  DateTime.parse(pref.getString(kUserJwtTokenExpiresPrefKey));
               if(tokenExpireDate.isAfter(DateTime.now())){
                   return User((b) => b
-                  ..id = pref.getString(kUserIdPrefKey)
+                  ..id = pref.getInt(kUserIdPrefKey)
                   ..username = pref.getString(kUsernamePrefKey)
                   ..email = pref.getString(kUserEmailPrefKey)
                   ..photoUrl = pref.getString(kUserPhotoUrlPrefKey)

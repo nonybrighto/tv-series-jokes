@@ -10,7 +10,7 @@ abstract class User implements Built<User, UserBuilder> {
 
   static Serializer<User> get serializer => _$userSerializer;
 
-  String get id;
+  int get id;
   String get username;
   @nullable
   String get photoUrl;
