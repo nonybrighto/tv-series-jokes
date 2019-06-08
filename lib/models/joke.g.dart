@@ -38,10 +38,10 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
         ..add(serializers.serialize(object.text,
             specifiedType: const FullType(String)));
     }
-    if (object.dateAdded != null) {
+    if (object.createdAt != null) {
       result
-        ..add('dateAdded')
-        ..add(serializers.serialize(object.dateAdded,
+        ..add('createdAt')
+        ..add(serializers.serialize(object.createdAt,
             specifiedType: const FullType(DateTime)));
     }
     if (object.likeCount != null) {
@@ -99,8 +99,8 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
           result.commentCount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'dateAdded':
-          result.dateAdded = serializers.deserialize(value,
+        case 'createdAt':
+          result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
         case 'likeCount':
@@ -144,7 +144,7 @@ class _$Joke extends Joke {
   @override
   final int commentCount;
   @override
-  final DateTime dateAdded;
+  final DateTime createdAt;
   @override
   final int likeCount;
   @override
@@ -166,7 +166,7 @@ class _$Joke extends Joke {
       this.title,
       this.text,
       this.commentCount,
-      this.dateAdded,
+      this.createdAt,
       this.likeCount,
       this.liked,
       this.favorited,
@@ -206,7 +206,7 @@ class _$Joke extends Joke {
         title == other.title &&
         text == other.text &&
         commentCount == other.commentCount &&
-        dateAdded == other.dateAdded &&
+        createdAt == other.createdAt &&
         likeCount == other.likeCount &&
         liked == other.liked &&
         favorited == other.favorited &&
@@ -230,7 +230,7 @@ class _$Joke extends Joke {
                                             title.hashCode),
                                         text.hashCode),
                                     commentCount.hashCode),
-                                dateAdded.hashCode),
+                                createdAt.hashCode),
                             likeCount.hashCode),
                         liked.hashCode),
                     favorited.hashCode),
@@ -246,7 +246,7 @@ class _$Joke extends Joke {
           ..add('title', title)
           ..add('text', text)
           ..add('commentCount', commentCount)
-          ..add('dateAdded', dateAdded)
+          ..add('createdAt', createdAt)
           ..add('likeCount', likeCount)
           ..add('liked', liked)
           ..add('favorited', favorited)
@@ -309,15 +309,15 @@ class _$JokeBuilder extends JokeBuilder {
   }
 
   @override
-  DateTime get dateAdded {
+  DateTime get createdAt {
     _$this;
-    return super.dateAdded;
+    return super.createdAt;
   }
 
   @override
-  set dateAdded(DateTime dateAdded) {
+  set createdAt(DateTime createdAt) {
     _$this;
-    super.dateAdded = dateAdded;
+    super.createdAt = createdAt;
   }
 
   @override
@@ -400,7 +400,7 @@ class _$JokeBuilder extends JokeBuilder {
       super.title = _$v.title;
       super.text = _$v.text;
       super.commentCount = _$v.commentCount;
-      super.dateAdded = _$v.dateAdded;
+      super.createdAt = _$v.createdAt;
       super.likeCount = _$v.likeCount;
       super.liked = _$v.liked;
       super.favorited = _$v.favorited;
@@ -435,7 +435,7 @@ class _$JokeBuilder extends JokeBuilder {
               title: title,
               text: text,
               commentCount: commentCount,
-              dateAdded: dateAdded,
+              createdAt: createdAt,
               likeCount: likeCount,
               liked: liked,
               favorited: favorited,

@@ -29,7 +29,7 @@ void main() {
         ..likeCount = 1
         ..liked = false
         ..favorited = false
-        ..dateAdded = DateTime(2003)
+        ..createdAt = DateTime(2003)
         ..movie.id = 1
         ..movie.name = 'movie name $num'
         ..movie.tmdbMovieId = 1
@@ -53,7 +53,7 @@ void main() {
       Comment((u) => u
       ..id = 1
       ..content='content'
-      ..dateAdded =DateTime(2000, 11, 22)
+      ..createdAt =DateTime(2000, 11, 22)
       ..owner.update((u) => u
           ..id = 1
           ..username = 'John'

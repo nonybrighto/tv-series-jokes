@@ -23,8 +23,8 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
       'content',
       serializers.serialize(object.content,
           specifiedType: const FullType(String)),
-      'dateAdded',
-      serializers.serialize(object.dateAdded,
+      'createdAt',
+      serializers.serialize(object.createdAt,
           specifiedType: const FullType(DateTime)),
     ];
     if (object.anonymousName != null) {
@@ -70,8 +70,8 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
           result.owner.replace(serializers.deserialize(value,
               specifiedType: const FullType(User)) as User);
           break;
-        case 'dateAdded':
-          result.dateAdded = serializers.deserialize(value,
+        case 'createdAt':
+          result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
       }
@@ -91,13 +91,13 @@ class _$Comment extends Comment {
   @override
   final User owner;
   @override
-  final DateTime dateAdded;
+  final DateTime createdAt;
 
   factory _$Comment([void Function(CommentBuilder) updates]) =>
       (new CommentBuilder()..update(updates)).build();
 
   _$Comment._(
-      {this.id, this.content, this.anonymousName, this.owner, this.dateAdded})
+      {this.id, this.content, this.anonymousName, this.owner, this.createdAt})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('Comment', 'id');
@@ -105,8 +105,8 @@ class _$Comment extends Comment {
     if (content == null) {
       throw new BuiltValueNullFieldError('Comment', 'content');
     }
-    if (dateAdded == null) {
-      throw new BuiltValueNullFieldError('Comment', 'dateAdded');
+    if (createdAt == null) {
+      throw new BuiltValueNullFieldError('Comment', 'createdAt');
     }
   }
 
@@ -125,7 +125,7 @@ class _$Comment extends Comment {
         content == other.content &&
         anonymousName == other.anonymousName &&
         owner == other.owner &&
-        dateAdded == other.dateAdded;
+        createdAt == other.createdAt;
   }
 
   @override
@@ -135,7 +135,7 @@ class _$Comment extends Comment {
             $jc($jc($jc(0, id.hashCode), content.hashCode),
                 anonymousName.hashCode),
             owner.hashCode),
-        dateAdded.hashCode));
+        createdAt.hashCode));
   }
 
   @override
@@ -145,7 +145,7 @@ class _$Comment extends Comment {
           ..add('content', content)
           ..add('anonymousName', anonymousName)
           ..add('owner', owner)
-          ..add('dateAdded', dateAdded))
+          ..add('createdAt', createdAt))
         .toString();
   }
 }
@@ -170,9 +170,9 @@ class CommentBuilder implements Builder<Comment, CommentBuilder> {
   UserBuilder get owner => _$this._owner ??= new UserBuilder();
   set owner(UserBuilder owner) => _$this._owner = owner;
 
-  DateTime _dateAdded;
-  DateTime get dateAdded => _$this._dateAdded;
-  set dateAdded(DateTime dateAdded) => _$this._dateAdded = dateAdded;
+  DateTime _createdAt;
+  DateTime get createdAt => _$this._createdAt;
+  set createdAt(DateTime createdAt) => _$this._createdAt = createdAt;
 
   CommentBuilder();
 
@@ -182,7 +182,7 @@ class CommentBuilder implements Builder<Comment, CommentBuilder> {
       _content = _$v.content;
       _anonymousName = _$v.anonymousName;
       _owner = _$v.owner?.toBuilder();
-      _dateAdded = _$v.dateAdded;
+      _createdAt = _$v.createdAt;
       _$v = null;
     }
     return this;
@@ -211,7 +211,7 @@ class CommentBuilder implements Builder<Comment, CommentBuilder> {
               content: content,
               anonymousName: anonymousName,
               owner: _owner?.build(),
-              dateAdded: dateAdded);
+              createdAt: createdAt);
     } catch (_) {
       String _$failedField;
       try {

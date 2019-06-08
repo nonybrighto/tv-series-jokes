@@ -7,7 +7,7 @@ void main() {
     Comment comment1 = Comment((u) => u
       ..id = 1
       ..content='content'
-      ..dateAdded =DateTime(2000, 11, 22)
+      ..createdAt =DateTime(2000, 11, 22)
       ..owner.update((u) => u
           ..id = 1
           ..username = 'John'
@@ -22,7 +22,7 @@ void main() {
     Comment comment2 = Comment((u) => u
       ..id = 1
       ..content='content'
-      ..dateAdded =DateTime(2000, 11, 22)
+      ..createdAt =DateTime(2000, 11, 22)
       ..owner.update((u) => u
           ..id = 1
           ..username = 'John'

@@ -23,7 +23,7 @@ abstract class Joke implements Built<Joke, JokeBuilder> {
   int get commentCount;
   //@BuiltValueField(wireName: 'joke_type')
   @nullable
-  DateTime get dateAdded;
+  DateTime get createdAt;
   @nullable
   int get likeCount;
   bool get liked;
@@ -64,7 +64,7 @@ abstract class JokeBuilder
   String text;
   int commentCount;
   @nullable
-  DateTime dateAdded;
+  DateTime createdAt;
   @nullable
   int likeCount;
   bool liked = false;

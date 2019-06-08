@@ -29,7 +29,7 @@ class JokeCommentCard extends StatelessWidget {
                   children: <Widget>[
                     UsernameText(user: comment.owner, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                     Text(DateFormatter.dateToString(
-                        comment.dateAdded, DateFormatPattern.timeAgo), style: TextStyle(color: Colors.grey[500]),)
+                        comment.createdAt, DateFormatPattern.timeAgo), style: TextStyle(color: Colors.grey[500]),)
                   ],
                 ),
                 Padding(

@@ -65,7 +65,7 @@ class JokeCard extends StatelessWidget {
         ],
       ),
       subtitle: Text(DateFormatter.dateToString(
-          joke.dateAdded, DateFormatPattern.timeAgo)),
+          joke.createdAt, DateFormatPattern.timeAgo)),
       trailing: _buildJokeMenuButton(context, jokeControlBloc),
     );
   }

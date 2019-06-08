@@ -29,7 +29,7 @@ void main() {
         ..likeCount = 1
         ..liked = false
         ..favorited = false
-        ..dateAdded = DateTime(2003)
+        ..createdAt = DateTime(2003)
         ..movie.update((b) => b
       ..id = 1
       ..name = 'name ssnum'

@@ -17,7 +17,7 @@ abstract class Comment implements Built<Comment, CommentBuilder> {
   String get anonymousName;
   @nullable
   User get owner;
-  DateTime get dateAdded;
+  DateTime get createdAt;
 
   factory Comment([updates(CommentBuilder b)]) = _$Comment;
   Comment._();
