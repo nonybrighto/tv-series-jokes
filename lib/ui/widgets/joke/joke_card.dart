@@ -171,7 +171,7 @@ class JokeCard extends StatelessWidget {
         width: double.infinity,
         child: FadeInImage.assetNetwork(
           fit: BoxFit.fill,
-          placeholder: 'assets/images/image_placeholder.png',
+          placeholder: 'assets/images/pl.png',
           image: imageUrl,
         ));
   }
