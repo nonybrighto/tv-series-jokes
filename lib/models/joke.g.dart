@@ -159,7 +159,7 @@ class _$Joke extends Joke {
   final String imageUrl;
 
   factory _$Joke([void Function(JokeBuilder) updates]) =>
-      (new JokeBuilder()..update(updates)).build();
+      (new JokeBuilder()..update(updates)).build() as _$Joke;
 
   _$Joke._(
       {this.id,
@@ -196,7 +196,7 @@ class _$Joke extends Joke {
       (toBuilder()..update(updates)).build();
 
   @override
-  JokeBuilder toBuilder() => new JokeBuilder()..replace(this);
+  _$JokeBuilder toBuilder() => new _$JokeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -257,68 +257,156 @@ class _$Joke extends Joke {
   }
 }
 
-class JokeBuilder implements Builder<Joke, JokeBuilder> {
+class _$JokeBuilder extends JokeBuilder {
   _$Joke _$v;
 
-  int _id;
-  int get id => _$this._id;
-  set id(int id) => _$this._id = id;
+  @override
+  int get id {
+    _$this;
+    return super.id;
+  }
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
+  @override
+  set id(int id) {
+    _$this;
+    super.id = id;
+  }
 
-  String _text;
-  String get text => _$this._text;
-  set text(String text) => _$this._text = text;
+  @override
+  String get title {
+    _$this;
+    return super.title;
+  }
 
-  int _commentCount;
-  int get commentCount => _$this._commentCount;
-  set commentCount(int commentCount) => _$this._commentCount = commentCount;
+  @override
+  set title(String title) {
+    _$this;
+    super.title = title;
+  }
 
-  DateTime _dateAdded;
-  DateTime get dateAdded => _$this._dateAdded;
-  set dateAdded(DateTime dateAdded) => _$this._dateAdded = dateAdded;
+  @override
+  String get text {
+    _$this;
+    return super.text;
+  }
 
-  int _likeCount;
-  int get likeCount => _$this._likeCount;
-  set likeCount(int likeCount) => _$this._likeCount = likeCount;
+  @override
+  set text(String text) {
+    _$this;
+    super.text = text;
+  }
 
-  bool _liked;
-  bool get liked => _$this._liked;
-  set liked(bool liked) => _$this._liked = liked;
+  @override
+  int get commentCount {
+    _$this;
+    return super.commentCount;
+  }
 
-  bool _favorited;
-  bool get favorited => _$this._favorited;
-  set favorited(bool favorited) => _$this._favorited = favorited;
+  @override
+  set commentCount(int commentCount) {
+    _$this;
+    super.commentCount = commentCount;
+  }
 
-  MovieBuilder _movie;
-  MovieBuilder get movie => _$this._movie ??= new MovieBuilder();
-  set movie(MovieBuilder movie) => _$this._movie = movie;
+  @override
+  DateTime get dateAdded {
+    _$this;
+    return super.dateAdded;
+  }
 
-  UserBuilder _owner;
-  UserBuilder get owner => _$this._owner ??= new UserBuilder();
-  set owner(UserBuilder owner) => _$this._owner = owner;
+  @override
+  set dateAdded(DateTime dateAdded) {
+    _$this;
+    super.dateAdded = dateAdded;
+  }
 
-  String _imageUrl;
-  String get imageUrl => _$this._imageUrl;
-  set imageUrl(String imageUrl) => _$this._imageUrl = imageUrl;
+  @override
+  int get likeCount {
+    _$this;
+    return super.likeCount;
+  }
 
-  JokeBuilder();
+  @override
+  set likeCount(int likeCount) {
+    _$this;
+    super.likeCount = likeCount;
+  }
+
+  @override
+  bool get liked {
+    _$this;
+    return super.liked;
+  }
+
+  @override
+  set liked(bool liked) {
+    _$this;
+    super.liked = liked;
+  }
+
+  @override
+  bool get favorited {
+    _$this;
+    return super.favorited;
+  }
+
+  @override
+  set favorited(bool favorited) {
+    _$this;
+    super.favorited = favorited;
+  }
+
+  @override
+  MovieBuilder get movie {
+    _$this;
+    return super.movie ??= new MovieBuilder();
+  }
+
+  @override
+  set movie(MovieBuilder movie) {
+    _$this;
+    super.movie = movie;
+  }
+
+  @override
+  UserBuilder get owner {
+    _$this;
+    return super.owner ??= new UserBuilder();
+  }
+
+  @override
+  set owner(UserBuilder owner) {
+    _$this;
+    super.owner = owner;
+  }
+
+  @override
+  String get imageUrl {
+    _$this;
+    return super.imageUrl;
+  }
+
+  @override
+  set imageUrl(String imageUrl) {
+    _$this;
+    super.imageUrl = imageUrl;
+  }
+
+  _$JokeBuilder() : super._();
 
   JokeBuilder get _$this {
     if (_$v != null) {
-      _id = _$v.id;
-      _title = _$v.title;
-      _text = _$v.text;
-      _commentCount = _$v.commentCount;
-      _dateAdded = _$v.dateAdded;
-      _likeCount = _$v.likeCount;
-      _liked = _$v.liked;
-      _favorited = _$v.favorited;
-      _movie = _$v.movie?.toBuilder();
-      _owner = _$v.owner?.toBuilder();
-      _imageUrl = _$v.imageUrl;
+      super.id = _$v.id;
+      super.title = _$v.title;
+      super.text = _$v.text;
+      super.commentCount = _$v.commentCount;
+      super.dateAdded = _$v.dateAdded;
+      super.likeCount = _$v.likeCount;
+      super.liked = _$v.liked;
+      super.favorited = _$v.favorited;
+      super.movie = _$v.movie?.toBuilder();
+      super.owner = _$v.owner?.toBuilder();
+      super.imageUrl = _$v.imageUrl;
       _$v = null;
     }
     return this;
@@ -351,16 +439,16 @@ class JokeBuilder implements Builder<Joke, JokeBuilder> {
               likeCount: likeCount,
               liked: liked,
               favorited: favorited,
-              movie: _movie?.build(),
-              owner: _owner?.build(),
+              movie: super.movie?.build(),
+              owner: super.owner?.build(),
               imageUrl: imageUrl);
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'movie';
-        _movie?.build();
+        super.movie?.build();
         _$failedField = 'owner';
-        _owner?.build();
+        super.owner?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Joke', _$failedField, e.toString());

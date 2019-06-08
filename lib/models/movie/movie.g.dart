@@ -144,7 +144,7 @@ class _$Movie extends Movie {
   final TmdbMovie tmdbDetails;
 
   factory _$Movie([void Function(MovieBuilder) updates]) =>
-      (new MovieBuilder()..update(updates)).build();
+      (new MovieBuilder()..update(updates)).build() as _$Movie;
 
   _$Movie._(
       {this.id,
@@ -183,7 +183,7 @@ class _$Movie extends Movie {
       (toBuilder()..update(updates)).build();
 
   @override
-  MovieBuilder toBuilder() => new MovieBuilder()..replace(this);
+  _$MovieBuilder toBuilder() => new _$MovieBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -238,66 +238,143 @@ class _$Movie extends Movie {
   }
 }
 
-class MovieBuilder implements Builder<Movie, MovieBuilder> {
+class _$MovieBuilder extends MovieBuilder {
   _$Movie _$v;
 
-  int _id;
-  int get id => _$this._id;
-  set id(int id) => _$this._id = id;
+  @override
+  int get id {
+    _$this;
+    return super.id;
+  }
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  @override
+  set id(int id) {
+    _$this;
+    super.id = id;
+  }
 
-  int _tmdbMovieId;
-  int get tmdbMovieId => _$this._tmdbMovieId;
-  set tmdbMovieId(int tmdbMovieId) => _$this._tmdbMovieId = tmdbMovieId;
+  @override
+  String get name {
+    _$this;
+    return super.name;
+  }
 
-  bool _followed;
-  bool get followed => _$this._followed;
-  set followed(bool followed) => _$this._followed = followed;
+  @override
+  set name(String name) {
+    _$this;
+    super.name = name;
+  }
 
-  String _overview;
-  String get overview => _$this._overview;
-  set overview(String overview) => _$this._overview = overview;
+  @override
+  int get tmdbMovieId {
+    _$this;
+    return super.tmdbMovieId;
+  }
 
-  String _posterPath;
-  String get posterPath => _$this._posterPath;
-  set posterPath(String posterPath) => _$this._posterPath = posterPath;
+  @override
+  set tmdbMovieId(int tmdbMovieId) {
+    _$this;
+    super.tmdbMovieId = tmdbMovieId;
+  }
 
-  int _jokeCount;
-  int get jokeCount => _$this._jokeCount;
-  set jokeCount(int jokeCount) => _$this._jokeCount = jokeCount;
+  @override
+  bool get followed {
+    _$this;
+    return super.followed;
+  }
 
-  DateTime _firstAirDate;
-  DateTime get firstAirDate => _$this._firstAirDate;
-  set firstAirDate(DateTime firstAirDate) =>
-      _$this._firstAirDate = firstAirDate;
+  @override
+  set followed(bool followed) {
+    _$this;
+    super.followed = followed;
+  }
 
-  int _followerCount;
-  int get followerCount => _$this._followerCount;
-  set followerCount(int followerCount) => _$this._followerCount = followerCount;
+  @override
+  String get overview {
+    _$this;
+    return super.overview;
+  }
 
-  TmdbMovieBuilder _tmdbDetails;
-  TmdbMovieBuilder get tmdbDetails =>
-      _$this._tmdbDetails ??= new TmdbMovieBuilder();
-  set tmdbDetails(TmdbMovieBuilder tmdbDetails) =>
-      _$this._tmdbDetails = tmdbDetails;
+  @override
+  set overview(String overview) {
+    _$this;
+    super.overview = overview;
+  }
 
-  MovieBuilder();
+  @override
+  String get posterPath {
+    _$this;
+    return super.posterPath;
+  }
+
+  @override
+  set posterPath(String posterPath) {
+    _$this;
+    super.posterPath = posterPath;
+  }
+
+  @override
+  int get jokeCount {
+    _$this;
+    return super.jokeCount;
+  }
+
+  @override
+  set jokeCount(int jokeCount) {
+    _$this;
+    super.jokeCount = jokeCount;
+  }
+
+  @override
+  DateTime get firstAirDate {
+    _$this;
+    return super.firstAirDate;
+  }
+
+  @override
+  set firstAirDate(DateTime firstAirDate) {
+    _$this;
+    super.firstAirDate = firstAirDate;
+  }
+
+  @override
+  int get followerCount {
+    _$this;
+    return super.followerCount;
+  }
+
+  @override
+  set followerCount(int followerCount) {
+    _$this;
+    super.followerCount = followerCount;
+  }
+
+  @override
+  TmdbMovieBuilder get tmdbDetails {
+    _$this;
+    return super.tmdbDetails ??= new TmdbMovieBuilder();
+  }
+
+  @override
+  set tmdbDetails(TmdbMovieBuilder tmdbDetails) {
+    _$this;
+    super.tmdbDetails = tmdbDetails;
+  }
+
+  _$MovieBuilder() : super._();
 
   MovieBuilder get _$this {
     if (_$v != null) {
-      _id = _$v.id;
-      _name = _$v.name;
-      _tmdbMovieId = _$v.tmdbMovieId;
-      _followed = _$v.followed;
-      _overview = _$v.overview;
-      _posterPath = _$v.posterPath;
-      _jokeCount = _$v.jokeCount;
-      _firstAirDate = _$v.firstAirDate;
-      _followerCount = _$v.followerCount;
-      _tmdbDetails = _$v.tmdbDetails?.toBuilder();
+      super.id = _$v.id;
+      super.name = _$v.name;
+      super.tmdbMovieId = _$v.tmdbMovieId;
+      super.followed = _$v.followed;
+      super.overview = _$v.overview;
+      super.posterPath = _$v.posterPath;
+      super.jokeCount = _$v.jokeCount;
+      super.firstAirDate = _$v.firstAirDate;
+      super.followerCount = _$v.followerCount;
+      super.tmdbDetails = _$v.tmdbDetails?.toBuilder();
       _$v = null;
     }
     return this;
@@ -331,12 +408,12 @@ class MovieBuilder implements Builder<Movie, MovieBuilder> {
               jokeCount: jokeCount,
               firstAirDate: firstAirDate,
               followerCount: followerCount,
-              tmdbDetails: _tmdbDetails?.build());
+              tmdbDetails: super.tmdbDetails?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'tmdbDetails';
-        _tmdbDetails?.build();
+        super.tmdbDetails?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Movie', _$failedField, e.toString());

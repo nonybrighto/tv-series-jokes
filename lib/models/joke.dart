@@ -54,3 +54,27 @@ abstract class Joke implements Built<Joke, JokeBuilder> {
   }
 
 }
+
+abstract class JokeBuilder
+    implements Builder<Joke, JokeBuilder> {
+
+  int id;
+  String title;
+  @nullable
+  String text;
+  int commentCount;
+  @nullable
+  DateTime dateAdded;
+  @nullable
+  int likeCount;
+  bool liked = false;
+  bool favorited = false;
+  @nullable 
+  String imageUrl;
+  @nullable
+  MovieBuilder movie;
+  UserBuilder owner;
+
+  factory JokeBuilder() = _$JokeBuilder;
+  JokeBuilder._();
+}

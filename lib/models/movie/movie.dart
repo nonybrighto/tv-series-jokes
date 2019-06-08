@@ -45,3 +45,25 @@ abstract class Movie implements Built<Movie, MovieBuilder> {
   }
 
 }
+
+abstract class MovieBuilder
+    implements Builder<Movie, MovieBuilder> {
+
+  int id;
+  String name;
+  int tmdbMovieId;
+  @nullable
+  bool followed = false;
+  @nullable
+  String overview;
+  @nullable
+  String posterPath;
+  int jokeCount;
+  DateTime firstAirDate;
+  int followerCount;
+  @nullable
+  TmdbMovieBuilder tmdbDetails;
+
+  factory MovieBuilder() = _$MovieBuilder;
+  MovieBuilder._();
+}

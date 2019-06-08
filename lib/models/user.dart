@@ -38,3 +38,27 @@ abstract class User implements Built<User, UserBuilder> {
   }
 
 }
+
+abstract class UserBuilder
+    implements Builder<User, UserBuilder> {
+
+ int id;
+  String username;
+  @nullable
+  String photoUrl;
+  @nullable
+  String email;
+  @nullable
+  int jokeCount;
+  @nullable
+  bool following = false;
+  @nullable
+  bool followed = false;
+  @nullable
+  int followerCount;
+  @nullable
+  int followingCount;
+
+  factory UserBuilder() = _$UserBuilder;
+  UserBuilder._();
+}

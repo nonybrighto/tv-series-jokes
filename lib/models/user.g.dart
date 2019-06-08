@@ -145,7 +145,7 @@ class _$User extends User {
   final int followingCount;
 
   factory _$User([void Function(UserBuilder) updates]) =>
-      (new UserBuilder()..update(updates)).build();
+      (new UserBuilder()..update(updates)).build() as _$User;
 
   _$User._(
       {this.id,
@@ -171,7 +171,7 @@ class _$User extends User {
       (toBuilder()..update(updates)).build();
 
   @override
-  UserBuilder toBuilder() => new UserBuilder()..replace(this);
+  _$UserBuilder toBuilder() => new _$UserBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -222,59 +222,130 @@ class _$User extends User {
   }
 }
 
-class UserBuilder implements Builder<User, UserBuilder> {
+class _$UserBuilder extends UserBuilder {
   _$User _$v;
 
-  int _id;
-  int get id => _$this._id;
-  set id(int id) => _$this._id = id;
+  @override
+  int get id {
+    _$this;
+    return super.id;
+  }
 
-  String _username;
-  String get username => _$this._username;
-  set username(String username) => _$this._username = username;
+  @override
+  set id(int id) {
+    _$this;
+    super.id = id;
+  }
 
-  String _photoUrl;
-  String get photoUrl => _$this._photoUrl;
-  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
+  @override
+  String get username {
+    _$this;
+    return super.username;
+  }
 
-  String _email;
-  String get email => _$this._email;
-  set email(String email) => _$this._email = email;
+  @override
+  set username(String username) {
+    _$this;
+    super.username = username;
+  }
 
-  int _jokeCount;
-  int get jokeCount => _$this._jokeCount;
-  set jokeCount(int jokeCount) => _$this._jokeCount = jokeCount;
+  @override
+  String get photoUrl {
+    _$this;
+    return super.photoUrl;
+  }
 
-  bool _following;
-  bool get following => _$this._following;
-  set following(bool following) => _$this._following = following;
+  @override
+  set photoUrl(String photoUrl) {
+    _$this;
+    super.photoUrl = photoUrl;
+  }
 
-  bool _followed;
-  bool get followed => _$this._followed;
-  set followed(bool followed) => _$this._followed = followed;
+  @override
+  String get email {
+    _$this;
+    return super.email;
+  }
 
-  int _followerCount;
-  int get followerCount => _$this._followerCount;
-  set followerCount(int followerCount) => _$this._followerCount = followerCount;
+  @override
+  set email(String email) {
+    _$this;
+    super.email = email;
+  }
 
-  int _followingCount;
-  int get followingCount => _$this._followingCount;
-  set followingCount(int followingCount) =>
-      _$this._followingCount = followingCount;
+  @override
+  int get jokeCount {
+    _$this;
+    return super.jokeCount;
+  }
 
-  UserBuilder();
+  @override
+  set jokeCount(int jokeCount) {
+    _$this;
+    super.jokeCount = jokeCount;
+  }
+
+  @override
+  bool get following {
+    _$this;
+    return super.following;
+  }
+
+  @override
+  set following(bool following) {
+    _$this;
+    super.following = following;
+  }
+
+  @override
+  bool get followed {
+    _$this;
+    return super.followed;
+  }
+
+  @override
+  set followed(bool followed) {
+    _$this;
+    super.followed = followed;
+  }
+
+  @override
+  int get followerCount {
+    _$this;
+    return super.followerCount;
+  }
+
+  @override
+  set followerCount(int followerCount) {
+    _$this;
+    super.followerCount = followerCount;
+  }
+
+  @override
+  int get followingCount {
+    _$this;
+    return super.followingCount;
+  }
+
+  @override
+  set followingCount(int followingCount) {
+    _$this;
+    super.followingCount = followingCount;
+  }
+
+  _$UserBuilder() : super._();
 
   UserBuilder get _$this {
     if (_$v != null) {
-      _id = _$v.id;
-      _username = _$v.username;
-      _photoUrl = _$v.photoUrl;
-      _email = _$v.email;
-      _jokeCount = _$v.jokeCount;
-      _following = _$v.following;
-      _followed = _$v.followed;
-      _followerCount = _$v.followerCount;
-      _followingCount = _$v.followingCount;
+      super.id = _$v.id;
+      super.username = _$v.username;
+      super.photoUrl = _$v.photoUrl;
+      super.email = _$v.email;
+      super.jokeCount = _$v.jokeCount;
+      super.following = _$v.following;
+      super.followed = _$v.followed;
+      super.followerCount = _$v.followerCount;
+      super.followingCount = _$v.followingCount;
       _$v = null;
     }
     return this;
