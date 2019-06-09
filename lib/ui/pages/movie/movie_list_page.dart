@@ -127,8 +127,7 @@ class _MovieListPageState extends State<MovieListPage> {
           color: Colors.white30,
           image: DecorationImage(
             fit: BoxFit.fill,
-            // image: CachedNetworkImageProvider('https://image.tmdb.org/t/p/w185_and_h278_bestv2/tJIWuZC4ZVUJdVHXJfefUDzS2BX.jpg')
-            image: NetworkImage(imageUrl),
+            image: NetworkImage('https://image.tmdb.org/t/p/w185_and_h278_bestv2'+imageUrl),
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
