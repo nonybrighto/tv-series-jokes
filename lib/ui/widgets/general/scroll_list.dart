@@ -63,8 +63,10 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
       builder: (BuildContext context,AsyncSnapshot<LoadState> snapshot){
         LoadState loadState =snapshot.data;
 
-        if(loadState is LoadComplete && !(loadState is ErrorLoad)){
-          canLoadMore = true;
+        if(loadState is LoadComplete && !(loadState is LoadEnd) && !(loadState is ErrorLoad)){
+           canLoadMore = true;
+        }else{
+          canLoadMore = false;
         }
 
         return Stack(
