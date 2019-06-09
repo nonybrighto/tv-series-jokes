@@ -8,6 +8,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tv_series_jokes/models/load_state.dart';
 import 'package:tv_series_jokes/models/movie/movie.dart';
+import 'package:tv_series_jokes/navigation/router.dart';
 import 'package:tv_series_jokes/services/joke_service.dart';
 import 'package:tv_series_jokes/services/movie_service.dart';
 import 'package:tv_series_jokes/ui/widgets/buttons/general_buttons.dart';
@@ -253,8 +254,7 @@ class _JokeAddPageState extends State<JokeAddPage>
       content: Text('Joke successfully added!!'),
     ));
     await Future.delayed(Duration(seconds: 2));
-    //navigate to homepage
-    Navigator.pop(context);
+    Router.gotoHomePage(context);
     return null;
   }
 }

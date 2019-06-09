@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
                 _drawerItem(context, Icons.favorite, 'Settings', onTap: _handleSettingsTap(context)),
                 _drawerItem(context, Icons.favorite, 'Share', onTap: _handleShareTap()),
                 _drawerItem(context, Icons.favorite, 'About' , onTap: _handleAboutTap(context)),
-                (isAuthenticated)?_drawerItem(context, Icons.favorite, 'Logout' , onTap: _handleLogoutTap(authBloc)): Container(),
+                (isAuthenticated)?_drawerItem(context, Icons.favorite, 'Logout' , onTap: _handleLogoutTap(context, authBloc)): Container(),
 
             ],
           );
@@ -186,9 +186,10 @@ class AppDrawer extends StatelessWidget {
       Router.gotoAboutPage(context);
     };
   }
-  _handleLogoutTap(AuthBloc authBloc){
+  _handleLogoutTap(BuildContext context, AuthBloc authBloc){
         return (){
         authBloc.logout();
+        Router.gotoHomePage(context);
     };
   }
 
