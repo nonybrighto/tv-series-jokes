@@ -53,7 +53,7 @@ class AuthService {
     Response response;
     try {
       Dio dio = new Dio();
-      response = await dio.post(usersUrl,
+      response = await dio.post(authUrl+'register',
           data: {'username': username, 'email': email, 'password': password});
      return _handleAuthResponse(response);
     } on DioError catch (error) {
@@ -151,7 +151,7 @@ class AuthService {
     pref.setInt(kUserIdPrefKey, user.id);
     pref.setString(kUsernamePrefKey, user.username);
     pref.setString(kUserEmailPrefKey, user.email);
-    pref.setString(kUserPhotoUrlPrefKey, user.photoUrl);
+    pref.setString(kUserProfilePhotoPrefKey, user.profilePhoto);
   }
 
   User _handleAuthResponse(Response response){
@@ -186,7 +186,7 @@ class AuthService {
                   ..id = pref.getInt(kUserIdPrefKey)
                   ..username = pref.getString(kUsernamePrefKey)
                   ..email = pref.getString(kUserEmailPrefKey)
-                  ..photoUrl = pref.getString(kUserPhotoUrlPrefKey)
+                  ..profilePhoto = pref.getString(kUserProfilePhotoPrefKey)
               );
             }else{
               deleteUserPreference();
@@ -206,7 +206,7 @@ class AuthService {
         pref.remove(kUserIdPrefKey);
         pref.remove(kUsernamePrefKey);
         pref.remove(kUserEmailPrefKey);
-        pref.remove(kUserPhotoUrlPrefKey);
+        pref.remove(kUserProfilePhotoPrefKey);
 
   }
 

@@ -41,7 +41,7 @@ void main() {
          ..owner.update((u) => u
           ..id = 1
           ..username = 'John $num'
-          ..photoUrl = 'the_url'
+          ..profilePhoto = 'the_url'
           ..jokeCount = 10
           ..followed =false
           ..following =true
@@ -57,7 +57,7 @@ void main() {
       ..owner.update((u) => u
           ..id = 1
           ..username = 'John'
-          ..photoUrl = 'the_url'
+          ..profilePhoto = 'the_url'
           ..jokeCount = 10
           ..followed =false
           ..following =true

@@ -43,7 +43,7 @@ void main() {
          ..owner.update((u) => u
           ..id = 1
           ..username = 'John $num'
-          ..photoUrl = 'the_url'
+          ..profilePhoto = 'the_url'
           ..jokeCount = 10
           ..followed =false
           ..following =true
@@ -195,7 +195,7 @@ void main() {
     JokeListBloc( jokeService: jokeService, fetchType: JokeListFetchType.userJokes, user: User((b) => b
       ..id= 1
       ..username='peter'
-      ..photoUrl='url'
+      ..profilePhoto='url'
        ..jokeCount = 10
           ..followed =false
           ..following =true

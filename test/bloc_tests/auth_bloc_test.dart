@@ -30,7 +30,7 @@ void main(){
     User user = User((b) => b
       ..id=1
       ..username='john'
-      ..photoUrl='theurl'
+      ..profilePhoto='theurl'
     );
 
     when(authService.signInWithEmailAndPassword('john@email.com', 'password123')).thenAnswer((_) async =>  user);

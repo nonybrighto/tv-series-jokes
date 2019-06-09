@@ -83,9 +83,9 @@ class _UserDetailsPageState extends State<UserDetailsPage>
                             children: <Widget>[
                               Container(
                                 color: Colors.pink,
-                                child: (user.photoUrl != null)
+                                child: (user.profilePhoto != null)
                                     ? Image.network(
-                                        user.photoUrl,
+                                        user.profilePhoto,
                                         fit: BoxFit.cover,
                                       )
                                     : null,
@@ -145,8 +145,8 @@ class _UserDetailsPageState extends State<UserDetailsPage>
         CircleAvatar(
           radius: 60,
           backgroundImage:
-              (user.photoUrl != null) ? NetworkImage(user.photoUrl) : null,
-          child: (user.photoUrl == null)
+              (user.profilePhoto != null) ? NetworkImage(user.profilePhoto) : null,
+          child: (user.profilePhoto == null)
               ? Text(
                   user.username.substring(0, 1),
                   style: TextStyle(fontSize: 33),

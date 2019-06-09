@@ -12,7 +12,7 @@ Future<Options> getAuthHeaderOption() async{
   if(userJwtToken != null){
     return Options(
       headers: {
-        HttpHeaders.authorizationHeader: 'jwt $userJwtToken' , // set content-length
+        HttpHeaders.authorizationHeader: 'bearer $userJwtToken' , // set content-length
       },
     );
   }

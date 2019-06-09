@@ -93,7 +93,7 @@ Future<User> changeUserPhoto({File photo}) async{
      Options authHeaderOption = await getAuthHeaderOption();
     Response response = await dio.put(userUrl+'photo',
           data: responseData, options: authHeaderOption);
-          updateUserPhotoPreference(response.data['photoUrl']);
+          updateUserPhotoPreference(response.data['profilePhoto']);
           return User.fromJson(response.data);
     }on DioError catch (error) {
       throw Exception((error.response != null)
@@ -104,7 +104,7 @@ Future<User> changeUserPhoto({File photo}) async{
 
 updateUserPhotoPreference(String photoUrl) async{
      SharedPreferences pref = await SharedPreferences.getInstance();
-     pref.setString(kUserPhotoUrlPrefKey, photoUrl);
+     pref.setString(kUserProfilePhotoPrefKey, photoUrl);
 }
 
 }

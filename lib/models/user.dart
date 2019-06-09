@@ -13,7 +13,7 @@ abstract class User implements Built<User, UserBuilder> {
   int get id;
   String get username;
   @nullable
-  String get photoUrl;
+  String get profilePhoto;
   @nullable
   String get email;
   @nullable
@@ -45,7 +45,7 @@ abstract class UserBuilder
  int id;
   String username;
   @nullable
-  String photoUrl;
+  String profilePhoto;
   @nullable
   String email;
   @nullable

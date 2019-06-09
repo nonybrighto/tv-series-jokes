@@ -11,7 +11,7 @@ void main() {
       ..owner.update((u) => u
           ..id = 1
           ..username = 'John'
-          ..photoUrl = 'the_url'
+          ..profilePhoto = 'the_url'
           ..jokeCount = 10
           ..followed =false
           ..following =true
@@ -26,7 +26,7 @@ void main() {
       ..owner.update((u) => u
           ..id = 1
           ..username = 'John'
-          ..photoUrl = 'the_url'
+          ..profilePhoto = 'the_url'
           ..jokeCount = 10
           ..followed =false
           ..following =true
@@ -41,7 +41,7 @@ void main() {
   test('Convert json to Comment object', () {
     
         String commentJsonString = """ {
-          "id": 1, "content":"Content", "dateAdded":"2000-11-22", "owner":{"id":1, "username":"John","photoUrl":"the_url"}
+          "id": 1, "content":"Content", "createdAt":"2000-11-22", "owner":{"id":1, "username":"John","profilePhoto":"the_url"}
         } """;
 
         Map<String, dynamic> jsonMap =  json.decode(commentJsonString);

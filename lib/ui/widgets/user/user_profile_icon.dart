@@ -17,8 +17,8 @@ class UserProfileIcon extends StatelessWidget {
               Router.gotoUserDetailsPage(context, user, userListBloc: BlocProvider.of<UserListBloc>(context));
           },
           child: CircleAvatar(
-          child: (user.photoUrl == null)? Text(user.username.substring(0,1)) : null,
-          backgroundImage: (user.photoUrl!=null)?NetworkImage(user.photoUrl): null,
+          child: (user.profilePhoto == null)? Text(user.username.substring(0,1)) : null,
+          backgroundImage: (user.profilePhoto!=null)?NetworkImage(user.profilePhoto): null,
       ),
     );
   }

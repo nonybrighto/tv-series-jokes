@@ -21,7 +21,7 @@ void main(){
       User((b) => b
       ..id=1
       ..username='peter $num'
-      ..photoUrl='url $num'
+      ..profilePhoto='url $num'
       ..jokeCount = 10
           ..followed =false
           ..following =true

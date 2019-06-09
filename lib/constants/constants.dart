@@ -11,7 +11,7 @@ const String kUserJwtTokenExpiresPrefKey = 'user_jwt_toke_expires';
 const String kUsernamePrefKey = 'username';
 const String kUserIdPrefKey = 'user_id';
 const String kUserEmailPrefKey = 'user_email';
-const String kUserPhotoUrlPrefKey = 'photo_url';
+const String kUserProfilePhotoPrefKey = 'profile_photo';
 
 //app theme preference key and value
 const String kAppThemeTypePrefKey = 'app_theme_type';
