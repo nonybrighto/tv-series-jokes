@@ -115,12 +115,11 @@ class _JokeCommentPageState extends State<JokeCommentPage> {
                                             String commentMessage) {
                                       if (commentAdded) {
                                         contentController.text = '';
-                                      } else {
-                                        Scaffold.of(context)
+                                      } 
+                                      Scaffold.of(context)
                                             .showSnackBar(SnackBar(
                                           content: Text(commentMessage),
                                         ));
-                                      }
                                     });
                                   }
                                 }: null,

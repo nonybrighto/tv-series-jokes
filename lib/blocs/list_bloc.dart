@@ -27,6 +27,8 @@ abstract class ListBloc<T> extends BlocBase {
       (item) => _deleteItemController.sink.add(item);
   void Function(T) get appendItem =>
       (item) => _appendItemController.sink.add(item);
+  void Function(LoadState) get changeLoadState =>
+      (loadState) => _loadStateController.sink.add(loadState);
 
   ListBloc() {
     _getItemsController.stream.listen(_handleFetchItemsFromSource);

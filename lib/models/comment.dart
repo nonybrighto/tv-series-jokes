@@ -29,4 +29,9 @@ abstract class Comment implements Built<Comment, CommentBuilder> {
     return comment;
   }
 
+
+  bool isAnonymous(){
+    return anonymousName != null;
+  }
+
 }

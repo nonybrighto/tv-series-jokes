@@ -29,7 +29,7 @@ class JokeCommentAddBloc extends BlocBase{
            try{
                 _loadStateContoller.sink.add(Loading());
                 Comment addedComment = await jokeService.addComment(joke: jokeCommentListBloc.commentJoke, content: details['content'], anonymousName: details['anonymousName'] );
-                jokeCommentListBloc.appendItem(addedComment);
+                jokeCommentListBloc.appendComment(addedComment);
                 jokeCommentListBloc.incrementJokeCommentsCount();
                 _loadStateContoller.sink.add(Loaded());
                 commentAddCallback(true, 'Comment Added'); 

@@ -16,8 +16,9 @@ class JokeCommentCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          UserProfileIcon(
+          (comment.isAnonymous()) ? CircleAvatar(child: Text('A'),) :UserProfileIcon(
             user: comment.owner,
+
           ),
           SizedBox(width: 10,),
           Expanded(
@@ -27,7 +28,7 @@ class JokeCommentCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    UsernameText(user: comment.owner, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    (comment.isAnonymous())?Text(comment.anonymousName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.grey),):UsernameText(user: comment.owner, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                     Text(DateFormatter.dateToString(
                         comment.createdAt, DateFormatPattern.timeAgo), style: TextStyle(color: Colors.grey[500]),)
                   ],
