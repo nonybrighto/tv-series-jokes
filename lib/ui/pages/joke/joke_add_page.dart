@@ -1,14 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:tv_series_jokes/blocs/auth_bloc.dart';
 import 'package:tv_series_jokes/blocs/joke_add_bloc.dart';
+import 'package:tv_series_jokes/blocs/joke_list_bloc.dart';
 import 'package:tv_series_jokes/models/bloc_delegate.dart';
 import 'package:tv_series_jokes/models/joke.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tv_series_jokes/models/load_state.dart';
 import 'package:tv_series_jokes/models/movie/movie.dart';
+import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/navigation/router.dart';
+import 'package:tv_series_jokes/services/auth_service.dart';
 import 'package:tv_series_jokes/services/joke_service.dart';
 import 'package:tv_series_jokes/services/movie_service.dart';
 import 'package:tv_series_jokes/ui/widgets/buttons/general_buttons.dart';
@@ -30,10 +34,11 @@ class _JokeAddPageState extends State<JokeAddPage>
   File _imageToUpload;
   BuildContext _context;
   int _selectedTmdbMovieId; // This is the Id used to save the movie
-
+  User currentUser;
 
   MovieService movieService = MovieService();
   JokeAddBloc jokeAddBloc;
+  AuthBloc authBloc;
 
 
   @override
@@ -43,48 +48,55 @@ class _JokeAddPageState extends State<JokeAddPage>
     _selectedTmdbMovieId = widget.selectedMovie?.tmdbMovieId;
     _movieController.text =
         (widget.selectedMovie != null) ? widget.selectedMovie.name : '';
+    authBloc = AuthBloc(authService: AuthService());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Joke'),
-      ),
+            title: Text('Add Joke'),
+          ),
       body: Builder(builder: (context) {
         _context = context;
         return SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextFormField(
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                        labelText: 'Title',
-                        hintText: 'Title'),
-                        validator: (value){
-                          if(value.trim().length < 3){
-                            return 'Title should be more than 3 characters';
-                          }
-                        },
+          child: StreamBuilder<User>(
+            stream: authBloc.currentUser,
+            builder: (context, currentUsersnapshot) {
+              currentUser = currentUsersnapshot.data;
+              return Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TextFormField(
+                        controller: _titleController,
+                        decoration: InputDecoration(
+                            labelText: 'Title',
+                            hintText: 'Title'),
+                            validator: (value){
+                              if(value.trim().length < 3){
+                                return 'Title should be more than 3 characters';
+                              }
+                            },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      _buildMovieSelectionField(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      _buildTextJokeSpecificLayout(),
+                      _buildImageJokeSpecificLayout(),
+                      _buildJokeAddSubmitionButton()
+                    ],
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  _buildMovieSelectionField(),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  _buildTextJokeSpecificLayout(),
-                  _buildImageJokeSpecificLayout(),
-                  _buildJokeAddSubmitionButton()
-                ],
-              ),
-            ),
+                ),
+              );
+            }
           ),
         );
       }),
@@ -254,7 +266,7 @@ class _JokeAddPageState extends State<JokeAddPage>
       content: Text('Joke successfully added!!'),
     ));
     await Future.delayed(Duration(seconds: 2));
-    Router.gotoHomePage(context);
+    Router.gotoJokeListPage(context, pageTitle: 'My Jokes', fetchType: JokeListFetchType.userJokes, user: currentUser);
     return null;
   }
 }
