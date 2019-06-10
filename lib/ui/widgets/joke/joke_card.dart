@@ -64,8 +64,16 @@ class JokeCard extends StatelessWidget {
               : Container(),
         ],
       ),
-      subtitle: Text(DateFormatter.dateToString(
+      subtitle: Row(children: <Widget>[
+        Text(DateFormatter.dateToString(
           joke.createdAt, DateFormatPattern.timeAgo)),
+          SizedBox(
+            width: 5,
+          ),
+          ActionChip(label: Text(joke.movie.name, style: TextStyle(fontSize: 10),), padding:  EdgeInsets.all(0), onPressed: (){
+               Router.gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
+          },),
+      ],),
       trailing: _buildJokeMenuButton(context, jokeControlBloc),
     );
   }
