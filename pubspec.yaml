@@ -38,7 +38,7 @@ dependencies:
   intl: ^0.15.7
   timeago: ^2.0.9
   flutter_facebook_login: ^2.0.0
-
+  font_awesome_flutter: ^8.4.0
 
 dev_dependencies:
   mockito: ^4.0.0

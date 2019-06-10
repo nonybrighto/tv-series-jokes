@@ -8,7 +8,7 @@ import 'package:tv_series_jokes/ui/widgets/buttons/general_buttons.dart';
 import 'package:tv_series_jokes/ui/widgets/clips/login_bottom_clipper.dart';
 import 'package:tv_series_jokes/ui/widgets/clips/login_top_clipper.dart';
 import 'package:tv_series_jokes/utils/validator.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 enum AuthType { login, signup }
@@ -267,15 +267,17 @@ class _AuthPageState extends State<AuthPage>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _socialButton(
-                  icon: Icons.ac_unit,
+                  icon: FontAwesomeIcons.facebookF,
                   clickable: buttonClickable,
+                  bgColor: Color(0XFF3f5993),
                   onTapCall: () {
                     authBloc.loginWithSocial(SocialLoginType.facebook, _authCallBack);
                   }),
               SizedBox(width: 20.0),
               _socialButton(
-                  icon: Icons.ac_unit,
+                  icon: FontAwesomeIcons.googlePlusG,
                   clickable: buttonClickable,
+                  bgColor: Color(0XFFc3533c),
                   onTapCall: () {
                     authBloc.loginWithSocial(SocialLoginType.google, _authCallBack);
                   }),
@@ -284,10 +286,11 @@ class _AuthPageState extends State<AuthPage>{
         });
   }
 
-  _socialButton({IconData icon, bool clickable, Function() onTapCall}) {
+  _socialButton({IconData icon, Color bgColor, bool clickable, Function() onTapCall}) {
     return InkWell(
       child: CircleAvatar(
         //child: Icon(FontAwesomeIcons.facebookF),
+        backgroundColor: bgColor,
         child: Icon(icon),
       ),
       onTap: clickable ? onTapCall : null,
