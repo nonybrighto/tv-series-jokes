@@ -135,6 +135,31 @@ test('can deserialize tmdb movie details', (){
 
   });
 
+  test('can deserialize tmdb movie with empty date string', (){
+
+    String tmdbJson = r''' 
+        {
+            "original_name": "How I'm Livin'",
+            "id": 9616,
+            "name": "How I'm Livin'",
+            "vote_count": 0,
+            "vote_average": 0,
+            "poster_path": null,
+            "first_air_date": "",
+            "popularity": 0.6,
+            "genre_ids": [],
+            "original_language": "en",
+            "backdrop_path": null,
+            "overview": "How I'm Livin' is a reality television show on BET. Each week, the show profiled a couple of big names in the entertainment industry and followed them on their activities for a day. They have included those on Steve Harvey, Lisa Raye, Khia, Tweet, Rickey Smiley, A.J. and Free from 106 & Park, and Guy Torry to name a few.\n\nThe show was supposed to be a competitor to MTV's highly rated Cribs.",
+            "origin_country": []
+        }
+    
+     ''';
+
+    TmdbMovie movieDetailsFromJson =TmdbMovie.fromJson(json.jsonDecode(tmdbJson));
+    expect(movieDetailsFromJson.id, 9616);
+  });
+
 
  
 }

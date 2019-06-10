@@ -54,7 +54,7 @@ class _MovieListPageState extends State<MovieListPage> {
             right: 0,
             child: _buildMovieDetails(movie),
           ),
-          _buildMovieImage(movie.posterPath),
+          _buildMovieImage(movie.getPosterUrl()),
         ],
       ),
     );
@@ -90,7 +90,7 @@ class _MovieListPageState extends State<MovieListPage> {
                 '${movie.jokeCount} jokes',
                 style: TextStyle(color: const Color(0XFFc0c0c0)),
               ),
-              Text(
+              if(movie.firstAirDate != null) Text(
                 DateFormatter.dateToString(
                         movie.firstAirDate, DateFormatPattern.wordDate),
                 style: TextStyle(color: const Color(0XFFc0c0c0)),
@@ -117,7 +117,8 @@ class _MovieListPageState extends State<MovieListPage> {
     );
   }
 
-  _buildMovieImage(String imageUrl) {
+  _buildMovieImage(String posterUrl) {
+    posterUrl = posterUrl == null ? '':posterUrl; 
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(
@@ -127,7 +128,7 @@ class _MovieListPageState extends State<MovieListPage> {
           color: Colors.white30,
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage('https://image.tmdb.org/t/p/w185_and_h278_bestv2'+imageUrl),
+            image: NetworkImage(posterUrl),
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),

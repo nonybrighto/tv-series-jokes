@@ -21,12 +21,14 @@ abstract class TmdbMovie implements Built<TmdbMovie, TmdbMovieBuilder> {
   @BuiltValueField(wireName: 'backdrop_path')
   String get backdropPath;
   String get overview;
+  @nullable
   @BuiltValueField(wireName: 'first_air_date')
   DateTime get firstAirDate;
   @nullable
   @BuiltValueField(wireName: 'last_air_date')
   DateTime get lastAirDate;
   @BuiltValueField(wireName: 'vote_average')
+  @nullable
   double get voteAverage;
   @nullable
   @BuiltValueField(wireName: 'number_of_seasons')
@@ -52,7 +54,7 @@ abstract class TmdbMovie implements Built<TmdbMovie, TmdbMovieBuilder> {
 
   String getBackdropUrl(){
 
-    return kTmdbImageUrl+'w780'+backdropPath;
+    return (backdropPath != null)?kTmdbImageUrl+'w780'+backdropPath: null;
   }
 
   String getGenreCsv(){

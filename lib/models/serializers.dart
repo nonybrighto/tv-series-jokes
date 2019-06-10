@@ -1,7 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:tv_series_jokes/models/comment.dart';
 import 'package:tv_series_jokes/models/comment_list_response.dart';
 import 'package:tv_series_jokes/models/joke.dart';
@@ -15,6 +14,7 @@ import 'package:tv_series_jokes/models/movie/tmdb_movie_genre.dart';
 import 'package:tv_series_jokes/models/movie/tmdb_movie_list_response.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/models/user_list_response.dart';
+import 'package:tv_series_jokes/utils/serializer/iso_8601_date_time_serializer.dart';
 
 part 'serializers.g.dart';
 

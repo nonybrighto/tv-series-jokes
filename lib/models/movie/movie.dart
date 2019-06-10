@@ -21,6 +21,7 @@ abstract class Movie implements Built<Movie, MovieBuilder> {
   @nullable
   String get posterPath;
   int get jokeCount;
+  @nullable
   DateTime get firstAirDate;
   int get followerCount;
   @nullable
@@ -37,7 +38,7 @@ abstract class Movie implements Built<Movie, MovieBuilder> {
   }
 
   String getPosterUrl(){
-    return kTmdbImageUrl+'w185_and_h278_bestv2'+posterPath;
+    return (posterPath != null)?kTmdbImageUrl+'w185_and_h278_bestv2'+posterPath: null;
   }
 
   bool hasFullDetails(){

@@ -25,12 +25,6 @@ class _$TmdbMovieSerializer implements StructuredSerializer<TmdbMovie> {
       'overview',
       serializers.serialize(object.overview,
           specifiedType: const FullType(String)),
-      'first_air_date',
-      serializers.serialize(object.firstAirDate,
-          specifiedType: const FullType(DateTime)),
-      'vote_average',
-      serializers.serialize(object.voteAverage,
-          specifiedType: const FullType(double)),
     ];
     if (object.backdropPath != null) {
       result
@@ -38,11 +32,23 @@ class _$TmdbMovieSerializer implements StructuredSerializer<TmdbMovie> {
         ..add(serializers.serialize(object.backdropPath,
             specifiedType: const FullType(String)));
     }
+    if (object.firstAirDate != null) {
+      result
+        ..add('first_air_date')
+        ..add(serializers.serialize(object.firstAirDate,
+            specifiedType: const FullType(DateTime)));
+    }
     if (object.lastAirDate != null) {
       result
         ..add('last_air_date')
         ..add(serializers.serialize(object.lastAirDate,
             specifiedType: const FullType(DateTime)));
+    }
+    if (object.voteAverage != null) {
+      result
+        ..add('vote_average')
+        ..add(serializers.serialize(object.voteAverage,
+            specifiedType: const FullType(double)));
     }
     if (object.numberOfSeasons != null) {
       result
@@ -173,12 +179,6 @@ class _$TmdbMovie extends TmdbMovie {
     }
     if (overview == null) {
       throw new BuiltValueNullFieldError('TmdbMovie', 'overview');
-    }
-    if (firstAirDate == null) {
-      throw new BuiltValueNullFieldError('TmdbMovie', 'firstAirDate');
-    }
-    if (voteAverage == null) {
-      throw new BuiltValueNullFieldError('TmdbMovie', 'voteAverage');
     }
   }
 

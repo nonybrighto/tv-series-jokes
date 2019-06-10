@@ -67,12 +67,12 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     flexibleSpace: new FlexibleSpaceBar(
                       title: Text(movie.name),
                       centerTitle: true,
-                      background: (movie.hasFullDetails())
+                      background: (movie.hasFullDetails() && movie.tmdbDetails.backdropPath != null)
                           ? Image.network(
                               movie.tmdbDetails.getBackdropUrl(),
                               fit: BoxFit.cover,
                             )
-                          : _buildBackDropPlaceHolder(movie.posterPath),
+                          : _buildBackDropPlaceHolder(movie.getPosterUrl()),
                     ),
                   ),
                   SliverList(
@@ -99,7 +99,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         Container(
           color: Colors.white30,
         ),
-        Container(
+        if((posterUrl != null)) Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover, image: NetworkImage(posterUrl))),
@@ -158,7 +158,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                 (movie.hasFullDetails() ? movie.tmdbDetails.overview : ''),
               ),
             ),
-            _buildPointDetail(
+            if(movie.firstAirDate != null)_buildPointDetail(
                 'Release Date',
                 DateFormatter.dateToString(
                     movie.firstAirDate, DateFormatPattern.wordDate)),

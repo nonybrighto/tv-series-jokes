@@ -28,9 +28,6 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
       'jokeCount',
       serializers.serialize(object.jokeCount,
           specifiedType: const FullType(int)),
-      'firstAirDate',
-      serializers.serialize(object.firstAirDate,
-          specifiedType: const FullType(DateTime)),
       'followerCount',
       serializers.serialize(object.followerCount,
           specifiedType: const FullType(int)),
@@ -52,6 +49,12 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
         ..add('posterPath')
         ..add(serializers.serialize(object.posterPath,
             specifiedType: const FullType(String)));
+    }
+    if (object.firstAirDate != null) {
+      result
+        ..add('firstAirDate')
+        ..add(serializers.serialize(object.firstAirDate,
+            specifiedType: const FullType(DateTime)));
     }
     if (object.tmdbDetails != null) {
       result
@@ -169,9 +172,6 @@ class _$Movie extends Movie {
     }
     if (jokeCount == null) {
       throw new BuiltValueNullFieldError('Movie', 'jokeCount');
-    }
-    if (firstAirDate == null) {
-      throw new BuiltValueNullFieldError('Movie', 'firstAirDate');
     }
     if (followerCount == null) {
       throw new BuiltValueNullFieldError('Movie', 'followerCount');
