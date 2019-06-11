@@ -31,7 +31,7 @@ class JokeCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildJokeHeader(context, jokeControlBloc),
+          _buildJokeHeader(context, jokeControlBloc, jokeListBloc),
           _buildJokeContent(
               context: context, joke: joke, jokeListBloc: jokeListBloc),
           _buildJokeFooter(context, jokeControlBloc, joke)
@@ -40,7 +40,7 @@ class JokeCard extends StatelessWidget {
     );
   }
 
-  _buildJokeHeader(context, JokeControlBloc jokeControlBloc) {
+  _buildJokeHeader(context, JokeControlBloc jokeControlBloc, JokeListBloc jokeListBloc) {
     return ListTile(
       leading: UserProfileIcon(
         user: joke.owner,
@@ -74,20 +74,20 @@ class JokeCard extends StatelessWidget {
                Router.gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
           },),
       ],),
-      trailing: _buildJokeMenuButton(context, jokeControlBloc),
+      trailing: _buildJokeMenuButton(context, jokeControlBloc, jokeListBloc),
     );
   }
 
-  _buildJokeMenuButton(BuildContext context, JokeControlBloc jokeControlBloc) {
+  _buildJokeMenuButton(BuildContext context, JokeControlBloc jokeControlBloc, JokeListBloc jokeListBloc) {
 
     
     return StreamBuilder<User>(
       stream: BlocProvider.of<AuthBloc>(context).currentUser,
       builder: (context, currentUserSnapshot) {
         User currentUser = currentUserSnapshot.data;
-        List<String> menuChoices = ['View Likes', 'Delete', 'Report Content'];
+        List<String> menuChoices = ['View Likes', 'View Comments','Delete', 'Report Content'];
         if(currentUser!=null && currentUser.id != joke.owner.id){
-              menuChoices.removeAt(1);
+              menuChoices.where((choice) => choice == 'Delete');
         }
         return PopupMenuButton<String>(
           icon: Icon(Icons.more_vert),
@@ -99,6 +99,9 @@ class JokeCard extends StatelessWidget {
             switch (value) {
               case 'View Likes':
                 Router.gotoJokeLikersPage(context, joke: joke);
+                break;
+              case 'View Comments':
+                Router.gotoJokeCommentsPage(context, joke: joke, jokeListBloc: jokeListBloc);
                 break;
               case 'Delete':
                _showDeleteDialog(context, jokeControlBloc);
