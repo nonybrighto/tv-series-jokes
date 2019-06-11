@@ -1,4 +1,5 @@
 import 'package:tv_series_jokes/blocs/auth_bloc.dart';
+import 'package:tv_series_jokes/blocs/auth_page_bloc.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv_series_jokes/services/auth_service.dart';
@@ -36,9 +37,10 @@ void main(){
     when(authService.signInWithEmailAndPassword('john@email.com', 'password123')).thenAnswer((_) async =>  user);
 
     AuthBloc authBloc = AuthBloc(authService: authService);
-    authBloc.login('john@email.com', 'password123', _authCallBack);
+    AuthPageBloc authPageBloc = AuthPageBloc(authBloc: authBloc);
+    authPageBloc.login('john@email.com', 'password123', _authCallBack);
     
-    expect(authBloc.loadState, emitsInOrder([loaded, loading, loaded]));
+    expect(authPageBloc.loadState, emitsInOrder([loaded, loading, loaded]));
 
     await Future.delayed(Duration(seconds: 0));
     expect(authBloc.currentUser, emits(user));
@@ -50,9 +52,10 @@ void main(){
     when(authService.signInWithEmailAndPassword('john@email.com', 'password123')).thenAnswer((_)  =>  Future.error('error occured'));
 
     AuthBloc authBloc = AuthBloc(authService: authService);
-    authBloc.login('john@email.com', 'password123', _authCallBack);
+    AuthPageBloc authPageBloc = AuthPageBloc(authBloc: authBloc);
+    authPageBloc.login('john@email.com', 'password123', _authCallBack);
     
-    expect(authBloc.loadState, emitsInOrder([loaded, loading, loadError]));
+    expect(authPageBloc.loadState, emitsInOrder([loaded, loading, loadError]));
     await Future.delayed(Duration(seconds: 0));
     expect(errorMessage, 'error occured');
     verify(authService.signInWithEmailAndPassword('john@email.com', 'password123'));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tv_series_jokes/blocs/auth_bloc.dart';
+import 'package:tv_series_jokes/blocs/auth_page_bloc.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
 import 'package:tv_series_jokes/models/auth.dart';
 import 'package:tv_series_jokes/models/load_state.dart';
@@ -27,7 +28,7 @@ class _AuthPageState extends State<AuthPage>{
   BuildContext _context;
   final _formKey = GlobalKey<FormState>();
   AuthType authType;
-  AuthBloc authBloc;
+  AuthPageBloc authPageBloc;
 
   TextEditingController _usernameController =
       TextEditingController(text: 'larry');
@@ -41,7 +42,8 @@ class _AuthPageState extends State<AuthPage>{
     super.initState();
     validator = Validator();
     authType = widget.authType;
-    authBloc = BlocProvider.of<AuthBloc>(context);
+    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
+    authPageBloc = AuthPageBloc(authBloc: authBloc);
   }
 
   @override
@@ -189,7 +191,7 @@ class _AuthPageState extends State<AuthPage>{
   _buildAuthButton() {
     return StreamBuilder<LoadState>(
         initialData: Loaded(),
-        stream: authBloc.loadState,
+        stream: authPageBloc.loadState,
         builder: (context, AsyncSnapshot<LoadState> loadStateSnapShot) {
           LoadState loadState = loadStateSnapShot.data;
           return RoundedButton(
@@ -205,10 +207,10 @@ class _AuthPageState extends State<AuthPage>{
                   ? () {
                       if (_formKey.currentState.validate()) {
                         if (authType == AuthType.signup) {
-                          authBloc.signUp(_usernameController.text,
+                          authPageBloc.signUp(_usernameController.text,
                               _emailController.text, _passwordController.text, _authCallBack);
                         } else {
-                          authBloc.login(
+                          authPageBloc.login(
                               _emailController.text, _passwordController.text, _authCallBack);
                         }
                       }
@@ -268,7 +270,7 @@ class _AuthPageState extends State<AuthPage>{
   _buildSocialButtons() {
     return StreamBuilder(
         initialData: Loaded(),
-        stream: authBloc.loadState,
+        stream: authPageBloc.loadState,
         builder: (context, loadStateSnapShot) {
           LoadState loadState = loadStateSnapShot.data;
           bool buttonClickable = _canClickAuthButton(loadState);
@@ -280,7 +282,7 @@ class _AuthPageState extends State<AuthPage>{
                   clickable: buttonClickable,
                   bgColor: Color(0XFF3f5993),
                   onTapCall: () {
-                    authBloc.loginWithSocial(SocialLoginType.facebook, _authCallBack);
+                    authPageBloc.loginWithSocial(SocialLoginType.facebook, _authCallBack);
                   }),
               SizedBox(width: 20.0),
               _socialButton(
@@ -288,7 +290,7 @@ class _AuthPageState extends State<AuthPage>{
                   clickable: buttonClickable,
                   bgColor: Color(0XFFc3533c),
                   onTapCall: () {
-                    authBloc.loginWithSocial(SocialLoginType.google, _authCallBack);
+                    authPageBloc.loginWithSocial(SocialLoginType.google, _authCallBack);
                   }),
             ],
           );
