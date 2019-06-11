@@ -4,6 +4,7 @@ import 'package:tv_series_jokes/blocs/bloc_provider.dart';
 import 'package:tv_series_jokes/models/auth.dart';
 import 'package:tv_series_jokes/models/load_state.dart';
 import 'package:tv_series_jokes/ui/pages/home_page.dart';
+import 'package:tv_series_jokes/ui/pages/terms_and_conditions_page.dart';
 import 'package:tv_series_jokes/ui/widgets/buttons/general_buttons.dart';
 import 'package:tv_series_jokes/ui/widgets/clips/login_bottom_clipper.dart';
 import 'package:tv_series_jokes/ui/widgets/clips/login_top_clipper.dart';
@@ -116,7 +117,12 @@ class _AuthPageState extends State<AuthPage>{
       return _buildFootDetail(
           infoText: 'By Signing up, you agree to our',
           buttonText: 'Terms and Conditions',
-          onPressed: () {});
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TermsAndConditionsPage()));
+          });
     } else {
       return _buildFootDetail(
           infoText: 'Don\'t have an account?',
