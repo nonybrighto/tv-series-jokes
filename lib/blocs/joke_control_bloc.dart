@@ -14,15 +14,15 @@ class JokeControlBloc extends BlocBase {
   JokeListBloc jokeListBloc;
   JokeService jokeService;
 
-  final _toggleJokeLikeController = StreamController<Null>();
-  final _toggleJokeFavoriteController = StreamController<Null>();
+  final _toggleJokeLikeController = StreamController<Function(bool, String)>();
+  final _toggleJokeFavoriteController = StreamController<Function(bool, String)>();
   final _shareJokeController = StreamController<Null>();
   final _deleteJokeController = StreamController<Map<String, dynamic>>();
 
-  void Function() get toggleJokeLike =>
-      () => _toggleJokeLikeController.sink.add(null);
-  void Function() get toggleJokeFavorite =>
-      () => _toggleJokeFavoriteController.sink.add(null);
+  void Function(Function(bool, String)) get toggleJokeLike =>
+      (likeCallback) => _toggleJokeLikeController.sink.add(likeCallback);
+  void Function(Function(bool, String)) get toggleJokeFavorite =>
+      (favoriteCallback) => _toggleJokeFavoriteController.sink.add(favoriteCallback);
   final _jokeSaveLoadStateController = StreamController<LoadState>();
   final _jokeShareLoadStateController = StreamController<LoadState>();
 
@@ -108,41 +108,34 @@ class JokeControlBloc extends BlocBase {
     _jokeSaveLoadStateController.sink.add(Loaded());
   }
 
-  // _handleShareJoke(_){
-
-  //      // JokeShareUtil jokeShareUtil = JokeShareUtil();
-  //       if(jokeControlled.hasImage()){
-  //        // jokeShareUtil.shareImageJoke(jokeControlled);
-  //       }else{
-  //        // jokeShareUtil.shareTextJoke(jokeControlled);
-  //       }
-
-  // }
-
-  _handleToggleJokeLike(_) async {
+  _handleToggleJokeLike(likeCallback) async {
     _toggleLike();
     jokeListBloc?.updateItem(jokeControlled);
     jokeListBloc?.changeCurrentJoke(jokeControlled);
     try {
       await jokeService.changeJokeLiking(
           joke: jokeControlled, like: jokeControlled.liked);
+      likeCallback(true, 'Joke has been liked!');
     } catch (err) {
       print(err);
       _toggleLike();
+      likeCallback(false, err.message);
       jokeListBloc?.updateItem(jokeControlled);
       jokeListBloc?.changeCurrentJoke(jokeControlled);
     }
   }
 
-  _handleToggleJokeFavorite(_) async {
+  _handleToggleJokeFavorite(favoriteCallback) async {
     _toggleFavorite();
     jokeListBloc?.updateItem(jokeControlled);
     jokeListBloc?.changeCurrentJoke(jokeControlled);
     try {
       await jokeService.changeJokeFavoriting(
           joke: jokeControlled, favorite: jokeControlled.favorited);
+          favoriteCallback(true, 'Joke has been added to favorite!');
     } catch (err) {
       _toggleFavorite();
+      favoriteCallback(false, err.message);
       jokeListBloc?.updateItem(jokeControlled);
       jokeListBloc?.changeCurrentJoke(jokeControlled);
     }

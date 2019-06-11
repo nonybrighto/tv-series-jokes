@@ -26,7 +26,12 @@ class JokeFavoriteActionButton extends StatelessWidget {
                         size: size,
                         onTap: () {
                           if(isAuthenticatedSnapshot.data){
-                            jokeControlBloc.toggleJokeFavorite();
+                            jokeControlBloc.toggleJokeFavorite((addedToFavorite, message){
+
+                                if(!addedToFavorite){
+                                  Scaffold.of(context).showSnackBar(SnackBar(content: Text(message),));
+                                }
+                            });
                           }else{
                             Router.gotoAuthPage(context, AuthType.login);
                           }

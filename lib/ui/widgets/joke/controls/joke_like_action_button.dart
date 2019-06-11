@@ -22,7 +22,11 @@ class JokeLikeActionButton extends StatelessWidget {
                 selected: joke.liked,
                 size: size,
                 onTap: () {
-                  jokeControlBloc.toggleJokeLike();
+                  jokeControlBloc.toggleJokeLike((liked, message){
+                                if(!liked){
+                                  Scaffold.of(context).showSnackBar(SnackBar(content: Text(message),));
+                                }
+                  });
                 });
   }
 }
