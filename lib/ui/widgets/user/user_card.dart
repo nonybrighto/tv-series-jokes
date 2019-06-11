@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tv_series_jokes/blocs/auth_bloc.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
 import 'package:tv_series_jokes/blocs/user_control_bloc.dart';
 import 'package:tv_series_jokes/blocs/user_list_bloc.dart';
 import 'package:tv_series_jokes/models/user.dart';
+import 'package:tv_series_jokes/navigation/router.dart';
 import 'package:tv_series_jokes/services/user_service.dart';
+import 'package:tv_series_jokes/ui/pages/auth_page.dart';
 import 'package:tv_series_jokes/ui/widgets/user/user_profile_icon.dart';
 import 'package:tv_series_jokes/ui/widgets/user/username_text.dart';
 
@@ -60,25 +63,34 @@ class UserCard extends StatelessWidget {
         userService: UserService());
     return BlocProvider<UserControlBloc>(
         bloc: userControlBloc,
-        child: (user.followed)
-            ? FlatButton(
-                child: Text(
-                  'FOLLOWING',
-                  style: TextStyle(fontSize: 12),
-                ),
-                onPressed: () {
-                  userControlBloc.toggleUserFollow();
-                },
-              )
-            : RaisedButton(
-                padding: EdgeInsets.all(0),
-                child: Text(
-                  'FOLLOW',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                ),
-                onPressed: () {
-                  userControlBloc.toggleUserFollow();
-                },
-              ));
+        child: StreamBuilder<bool>(
+          stream: BlocProvider.of<AuthBloc>(context).isAuthenticated,
+          builder: (context, isAuthenticatedSnapshot) {
+            return (user.followed)
+                ? FlatButton(
+                    child: Text(
+                      'FOLLOWING',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    onPressed: () {
+                      userControlBloc.toggleUserFollow();
+                    },
+                  )
+                : RaisedButton(
+                    padding: EdgeInsets.all(0),
+                    child: Text(
+                      'FOLLOW',
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                    onPressed: () {
+                      if(isAuthenticatedSnapshot.data){
+                        userControlBloc.toggleUserFollow();
+                      }else{
+                        Router.gotoAuthPage(context, AuthType.login);
+                      }
+                    },
+                  );
+          }
+        ));
   }
 }
