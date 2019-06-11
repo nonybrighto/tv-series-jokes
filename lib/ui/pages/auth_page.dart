@@ -94,6 +94,7 @@ class _AuthPageState extends State<AuthPage>{
                       clipper: LoginTopClipper(),
                       child: Container(
                         height: 260,
+                        width: double.infinity,
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                                 begin: Alignment.topCenter,
@@ -102,6 +103,8 @@ class _AuthPageState extends State<AuthPage>{
                               Color(0Xfffa7c05),
                               Color(0Xffee3e00)
                             ])),
+
+                            child:  Image.asset('assets/images/icon_light.png'),
                       ),
                     ),
                   ],
