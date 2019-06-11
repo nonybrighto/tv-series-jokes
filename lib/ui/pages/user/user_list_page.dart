@@ -7,7 +7,8 @@ import 'package:tv_series_jokes/ui/widgets/user/user_card.dart';
 
 class UserListPage extends StatefulWidget {
   final bool showFollowDetails;
-  UserListPage({Key key, this.showFollowDetails = false}) : super(key: key);
+  final String title;
+  UserListPage({Key key, this.showFollowDetails = false, this.title}) : super(key: key);
 
   @override
   _UserListPageState createState() => new _UserListPageState();
@@ -29,7 +30,7 @@ class _UserListPageState extends State<UserListPage> {
 
     return Scaffold(
 
-      appBar: AppBar(title: Text('Users'),),
+      appBar: AppBar(title: Text((widget.title != null)? widget.title : 'Users' ),),
       body: ScrollList<User>(
       scrollListType: ScrollListType.list,
       listContentStream: _userListBloc.items,

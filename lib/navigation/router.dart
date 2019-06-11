@@ -86,7 +86,16 @@ class Router{
         userListBloc.fetchJokeLikers(joke);
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<UserListBloc>(
           bloc: userListBloc,
-          child: UserListPage(showFollowDetails: false,),
+          child: UserListPage(showFollowDetails: false, title: 'Joke likers',),
+        )));
+  }
+  static gotoMovieFollowersPage(BuildContext context, {Movie movie}){
+
+        UserListBloc userListBloc = UserListBloc(userService: UserService());
+        userListBloc.fetchMovieFollowers(movie);
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<UserListBloc>(
+          bloc: userListBloc,
+          child: UserListPage(showFollowDetails: true, title: 'Movie Followers',),
         )));
   }
 

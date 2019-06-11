@@ -4,6 +4,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:tv_series_jokes/blocs/auth_bloc.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
+import 'package:tv_series_jokes/blocs/joke_list_bloc.dart';
 import 'package:tv_series_jokes/blocs/movie_control_bloc.dart';
 import 'package:tv_series_jokes/blocs/movie_details_bloc.dart';
 import 'package:tv_series_jokes/models/movie/tmdb_movie_cast.dart';
@@ -203,9 +204,13 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _countDetailBox('JOKES', movie.jokeCount),
+            _countDetailBox('JOKES', movie.jokeCount, (){
+                 Router.gotoJokeListPage(context, pageTitle: movie.name, fetchType: JokeListFetchType.movieJokes, movie: movie);
+            }),
             Divider(color: Colors.grey[300]),
-            _countDetailBox('FOLLOWERS', movie.followerCount),
+            _countDetailBox('FOLLOWERS', movie.followerCount, (){
+              Router.gotoMovieFollowersPage(context, movie: movie);
+            }),
           ],
         ),
       ),
@@ -270,22 +275,25 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     );
   }
 
-  _countDetailBox(String detail, int count) {
-    return Column(
-      children: <Widget>[
-        Text(
-          count.toString(),
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
-        ),
-        SizedBox(
-          height: 5.0,
-        ),
-        Text(
-          detail,
-          style: TextStyle(fontSize: 12.0, color: Colors.grey),
-        ),
-      ],
+  _countDetailBox(String detail, int count, Function() onTap) {
+    return GestureDetector(
+          onTap: onTap,
+          child: Column(
+        children: <Widget>[
+          Text(
+            count.toString(),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          Text(
+            detail,
+            style: TextStyle(fontSize: 12.0, color: Colors.grey),
+          ),
+        ],
+      ),
     );
   }
 

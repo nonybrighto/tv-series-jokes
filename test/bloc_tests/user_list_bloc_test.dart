@@ -46,4 +46,13 @@ void main(){
 
     verify(userService.fetchJokeLikers(jokeLiked: anyNamed('jokeLiked'), page: anyNamed('page')));
   });
+  test('expect to fetch movie followers', ()async{
+
+        UserListBloc userListBloc =
+    UserListBloc(userService: userService);
+    userListBloc.fetchMovieFollowers(null);
+     await Future.delayed(Duration(seconds: 2));
+
+    verify(userService.fetchMovieFollowers(movie: anyNamed('movie'), page: anyNamed('page')));
+  });
 }

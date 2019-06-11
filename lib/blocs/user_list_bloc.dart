@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:tv_series_jokes/blocs/list_bloc.dart';
 import 'package:tv_series_jokes/models/joke.dart';
+import 'package:tv_series_jokes/models/movie/movie.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/models/user_list_response.dart';
 import 'package:tv_series_jokes/services/user_service.dart';
@@ -12,6 +13,7 @@ class UserListBloc extends ListBloc<User>{
 
   Joke _jokeLiked;
   User _userForFollow;
+  Movie _movie;
   UserFollowType _followType;
 
   UserListFetchType _userListFetchType;
@@ -20,6 +22,7 @@ class UserListBloc extends ListBloc<User>{
   StreamController _fetchjokeLikersController =StreamController<Joke>();
   StreamController<Map<String, dynamic>> _fetchUserFollowersController =StreamController<Map<String, dynamic>>();
   StreamController _fetchUserFollowingController =StreamController<User>();
+  StreamController _fetchMovieFollowersController =StreamController<Movie>();
 
 
   //stream
@@ -28,6 +31,7 @@ class UserListBloc extends ListBloc<User>{
   //sink
   void Function(Joke) get fetchJokeLikers => (joke) => _fetchjokeLikersController.sink.add(joke);
   void Function(User, UserFollowType) get fetchUserFollow => (user, followType) => _fetchUserFollowersController.sink.add({'user': user, 'followType':followType});
+  void Function(Movie) get fetchMovieFollowers => (movie) => _fetchMovieFollowersController.sink.add(movie);
 
  
  UserListBloc({this.userService}){
@@ -45,6 +49,12 @@ class UserListBloc extends ListBloc<User>{
         _userListFetchType = UserListFetchType.userFollow;
         _getFirstPageUsers();
     });
+
+    _fetchMovieFollowersController.stream.listen((movie){
+          _userListFetchType =UserListFetchType.movieFollowers;
+          _movie = movie;
+          _getFirstPageUsers();
+    });
  }
  
   @override
@@ -53,6 +63,7 @@ class UserListBloc extends ListBloc<User>{
     _fetchjokeLikersController.close();
     _fetchUserFollowersController.close();
     _fetchUserFollowingController.close();
+    _fetchMovieFollowersController.close();
 
   }
 
@@ -70,6 +81,8 @@ class UserListBloc extends ListBloc<User>{
         break;
       case UserListFetchType.userFollow:
         return await userService.fetchUserFollow(user: _userForFollow, userFollowType: _followType, page: currentPage);
+      case UserListFetchType.movieFollowers:
+        return await userService.fetchMovieFollowers(movie: _movie, page: currentPage);
       break;
       default:
           return null;
@@ -88,6 +101,6 @@ class UserListBloc extends ListBloc<User>{
   }
 }
 
-enum UserListFetchType{jokeLikers, userFollow}
+enum UserListFetchType{jokeLikers, userFollow, movieFollowers}
 
 enum UserFollowType{followers, following}

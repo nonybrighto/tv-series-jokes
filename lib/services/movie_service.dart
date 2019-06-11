@@ -57,9 +57,9 @@ class MovieService{
         try {
           Options authHeaderOption = await getAuthHeaderOption();
           if(follow){
-              await dio.put(moviesUrl + '${movie.id}/following', options: authHeaderOption);
+              await dio.put(moviesUrl + '${movie.id}/followers', options: authHeaderOption);
           }else{
-              await dio.delete(moviesUrl + '${movie.id}/following', options: authHeaderOption);
+              await dio.delete(moviesUrl + '${movie.id}/followers', options: authHeaderOption);
           }
           return true;
         } on DioError catch (error) {

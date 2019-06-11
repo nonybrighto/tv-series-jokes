@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tv_series_jokes/blocs/user_list_bloc.dart';
 import 'package:tv_series_jokes/models/joke.dart';
+import 'package:tv_series_jokes/models/movie/movie.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/models/user_list_response.dart';
 import 'package:tv_series_jokes/services/auth_header.dart';
@@ -16,6 +17,7 @@ class UserService {
   final String userUrl = kAppApiUrl + '/user/';
   final String usersUrl = kAppApiUrl + '/users/';
   final String jokesUrl = kAppApiUrl + '/jokes/';
+  final String moviesUrl = kAppApiUrl + '/movies/';
 
   Dio dio = new Dio();
 
@@ -75,6 +77,19 @@ Future<UserListResponse> fetchUserFollow({User user, int page, UserFollowType us
        String followTypeString = (userFollowType == UserFollowType.followers)?'followers':'following';
        Options authHeaderOption = await getAuthHeaderOption();
        Response response = await dio.get(usersUrl + '${user.id}/$followTypeString?page=$page', options: authHeaderOption);
+      return UserListResponse.fromJson(response.data);
+    } on DioError catch (error) {
+      throw Exception((error.response != null)
+          ? error.response.data['message']
+          : 'Error Connectiing to server');
+    }
+  
+}
+Future<UserListResponse> fetchMovieFollowers({Movie movie, int page}) async{
+
+     try {
+       Options authHeaderOption = await getAuthHeaderOption();
+       Response response = await dio.get(moviesUrl + '${movie.id}/followers?page=$page', options: authHeaderOption);
       return UserListResponse.fromJson(response.data);
     } on DioError catch (error) {
       throw Exception((error.response != null)
