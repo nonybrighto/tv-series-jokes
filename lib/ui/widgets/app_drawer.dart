@@ -1,5 +1,5 @@
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 import 'package:tv_series_jokes/blocs/auth_bloc.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
 import 'package:tv_series_jokes/blocs/joke_list_bloc.dart';
@@ -197,8 +197,9 @@ class AppDrawer extends StatelessWidget {
   _handleShareTap(){ 
 
       return (){
-         Share.share('Hey! Checkout some funny TV series jokes in Tv Series '+
-    'Jokes Application!!! https://github.com/nonybrighto/tv-series-jokes');
+         Share.text('(TvSeriesJokes App)', 'Hey! Checkout some funny TV series jokes in TvSeriesJokes '+
+    ' Application!!! https://github.com/nonybrighto/tv-series-jokes', 'text/plain');
+
       };
   }
 

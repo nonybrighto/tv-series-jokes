@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class JokeSaveUtil{
 
@@ -26,9 +27,15 @@ class JokeSaveUtil{
   }
 
   saveImage(String imageUrl, String fileName, extension) async{
-        String name = fileName+extension;
-        String directoryPath = await appDirectoryPath();
-        await Dio().download(imageUrl, '$directoryPath/$name');
+       
+       String name = fileName+'.jpg';
+       String directoryPath = await appDirectoryPath();
+       final cacheManager = DefaultCacheManager();
+       File file = await cacheManager.getSingleFile(imageUrl);
+
+       List<int> fileBytes = await file.readAsBytes();
+       File storageFile = File('$directoryPath/$name')..writeAsBytesSync(fileBytes);
+       return true;
   }
 
 
