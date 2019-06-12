@@ -18,6 +18,7 @@ class JokeControlBloc extends BlocBase {
   final _toggleJokeFavoriteController = StreamController<Function(bool, String)>();
   final _shareJokeController = StreamController<Null>();
   final _deleteJokeController = StreamController<Map<String, dynamic>>();
+  final _reportJokeController = StreamController<Map<String, dynamic>>();
 
   void Function(Function(bool, String)) get toggleJokeLike =>
       (likeCallback) => _toggleJokeLikeController.sink.add(likeCallback);
@@ -38,6 +39,9 @@ class JokeControlBloc extends BlocBase {
 
   void Function(Function(String)) get deleteJoke => (deleteCallback) => _deleteJokeController.sink.add({'deleteCallback': deleteCallback});
 
+  void Function(Function(String)) get reportJoke => (reportCallback) => _reportJokeController.sink.add({'reportCallback': reportCallback});
+
+
   void Function() get shareJoke =>() => _shareJokeController.sink.add(null);
 
   //stream
@@ -51,8 +55,21 @@ class JokeControlBloc extends BlocBase {
     _saveImageJokeController.stream.listen(_handleSaveImageJoke);
     _shareJokeController.stream.listen(_handleShareJoke);
     _deleteJokeController.stream.listen(_handleDeleteJoke);
+    _reportJokeController.stream.listen(_handleReportJoke);
   }
 
+  _handleReportJoke(Map<String, dynamic> details) async{
+
+        Function(String) deleteCallback = details['reportCallback']; 
+
+        try{
+            await jokeService.reportJoke(joke: jokeControlled);
+            deleteCallback('Joke has been reported!');
+        }catch(error){
+            deleteCallback('Error: Failed to report joke!');
+        }
+    
+  }
   _handleDeleteJoke(Map<String, dynamic> details) async{
 
         Function(String) deleteCallback = details['deleteCallback']; 
@@ -162,5 +179,6 @@ class JokeControlBloc extends BlocBase {
     _saveImageJokeController.close();
     _jokeShareLoadStateController.close();
     _deleteJokeController.close();
+    _reportJokeController.close();
   }
 }

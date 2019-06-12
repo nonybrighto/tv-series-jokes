@@ -120,6 +120,21 @@ void main(){
 
     });
 
+    test('sends request to report joke and return a message in callback', ()async{
+
+      String returnedMessage;
+      JokeListBloc jokeListBloc = JokeListBloc(jokeService: jokeService);
+      JokeControlBloc jokeControlBloc = JokeControlBloc(jokeService: jokeService, jokeControlled: joke, jokeListBloc: jokeListBloc);
+      jokeControlBloc.reportJoke((message){
+            returnedMessage = message;
+      });
+      await Future.delayed(Duration(seconds: 0));
+      verify(jokeService.reportJoke(joke: anyNamed('joke')));
+      expect(returnedMessage.length > 0, true);
+
+
+    });
+
 
 
 }

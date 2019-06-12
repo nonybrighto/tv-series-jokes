@@ -190,4 +190,15 @@ class JokeService {
           : 'Error Connectiing to server');
     }
   }
+  Future<bool> reportJoke({Joke joke}) async {
+     try {
+      Options authHeaderOption = await getAuthHeaderOption();
+      await dio.put(jokesUrl + '${joke.id}/reports', options: authHeaderOption);
+      return true;
+    } on DioError catch (error) {
+      throw Exception((error.response != null)
+          ? error.response.data['message']
+          : 'Error Connecting to server');
+    }
+  }
 }

@@ -107,6 +107,9 @@ class JokeCard extends StatelessWidget {
                _showDeleteDialog(context, jokeControlBloc);
                 break;
               case 'Report Content':
+                  jokeControlBloc.reportJoke((message){
+                      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message),));
+                  });
                 break;
             }
           },
