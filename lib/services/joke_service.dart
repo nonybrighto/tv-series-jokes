@@ -10,6 +10,7 @@ import 'package:tv_series_jokes/models/movie/movie.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/services/auth_header.dart';
 import 'package:path/path.dart';
+import 'package:tv_series_jokes/utils/image_compressor.dart';
 
 class JokeService {
   final String jokesUrl = kAppApiUrl + '/jokes/';
@@ -125,13 +126,16 @@ class JokeService {
   Future<Joke> addJoke({Map<String, dynamic> jokeUploadDetails}) async {
     try {
       Options authHeaderOption = await getAuthHeaderOption();
-
       File imageToUpload = jokeUploadDetails['imageToUpload'];
+      File newFile;
+      if(imageToUpload != null){
+        newFile = await compressImage(imageFile:imageToUpload, width:450, imageTemporaryPath: await generateImageTempPath()); 
+      }
       String fileName = (imageToUpload != null)? basename(imageToUpload.path):'';
       Map<String, dynamic> gottenData = {
         'title': jokeUploadDetails['title'],
         'tmdbMovieId': jokeUploadDetails['tmdbMovieId'],
-      }..addAll((imageToUpload != null)? {'image': UploadFileInfo(imageToUpload, fileName)}:{})
+      }..addAll((imageToUpload != null)? {'image': UploadFileInfo(newFile, fileName)}:{})
       ..addAll(((jokeUploadDetails['text'] as String).isNotEmpty)? {'text': jokeUploadDetails['text']}:{});
 
       Map<String, dynamic> responseData = (imageToUpload == null)

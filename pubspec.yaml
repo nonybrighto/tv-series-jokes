@@ -40,6 +40,7 @@ dependencies:
   flutter_facebook_login: ^2.0.0
   font_awesome_flutter: ^8.4.0
   url_launcher: ^5.0.3
+  image: ^2.1.4
 
 dev_dependencies:
   mockito: ^4.0.0

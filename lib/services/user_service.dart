@@ -9,6 +9,7 @@ import 'package:tv_series_jokes/models/movie/movie.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/models/user_list_response.dart';
 import 'package:tv_series_jokes/services/auth_header.dart';
+import 'package:tv_series_jokes/utils/image_compressor.dart';
 import '../constants/constants.dart';
 
 class UserService {
@@ -104,7 +105,8 @@ Future<User> changeUserPhoto({File photo}) async{
   
     try{
           String fileName = basename(photo.path);
-    Map<String, dynamic> responseData = FormData.from({'image': UploadFileInfo(photo, fileName)});
+          File compressedFile = await compressImage(imageFile:photo, width:130, imageTemporaryPath: await generateImageTempPath()); 
+    Map<String, dynamic> responseData = FormData.from({'image': UploadFileInfo(compressedFile, fileName)});
      Options authHeaderOption = await getAuthHeaderOption();
     Response response = await dio.put(userUrl+'photo',
           data: responseData, options: authHeaderOption);
