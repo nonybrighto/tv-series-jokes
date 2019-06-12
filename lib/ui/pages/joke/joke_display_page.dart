@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
@@ -67,7 +68,7 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
   _displayImageJoke(Joke joke) {
     return Stack(
       children: <Widget>[
-        ZoomableImage(NetworkImage(joke.imageUrl),
+        ZoomableImage(CachedNetworkImageProvider(joke.imageUrl),
             placeholder: const Center(child: const CircularProgressIndicator()),
             backgroundColor: Colors.black),
         (joke.text != null)

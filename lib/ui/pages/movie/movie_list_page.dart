@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
 import 'package:tv_series_jokes/blocs/joke_list_bloc.dart';
@@ -128,7 +129,7 @@ class _MovieListPageState extends State<MovieListPage> {
           color: Colors.white30,
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage(posterUrl),
+            image: CachedNetworkImageProvider(posterUrl),
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),

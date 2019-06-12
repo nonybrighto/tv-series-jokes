@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:built_collection/built_collection.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tv_series_jokes/blocs/auth_bloc.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
@@ -69,9 +70,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                       title: Text(movie.name),
                       centerTitle: true,
                       background: (movie.hasFullDetails() && movie.tmdbDetails.backdropPath != null)
-                          ? Image.network(
-                              movie.tmdbDetails.getBackdropUrl(),
-                              fit: BoxFit.cover,
+                          ?CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: movie.tmdbDetails.getBackdropUrl()
                             )
                           : _buildBackDropPlaceHolder(movie.getPosterUrl()),
                     ),
@@ -103,7 +104,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         if((posterUrl != null)) Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover, image: NetworkImage(posterUrl))),
+                  fit: BoxFit.cover, image: CachedNetworkImageProvider(posterUrl))),
         ),
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -256,7 +257,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
               image: (movieCast.getProfileUrl() != null)
                   ? DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(movieCast.getProfileUrl()))
+                      image: CachedNetworkImageProvider(movieCast.getProfileUrl()))
                   : null,
             ),
           ),

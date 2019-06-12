@@ -14,6 +14,7 @@ import 'package:tv_series_jokes/ui/widgets/joke/controls/joke_share_action_butto
 import 'package:tv_series_jokes/ui/widgets/user/user_profile_icon.dart';
 import 'package:tv_series_jokes/ui/widgets/user/username_text.dart';
 import 'package:tv_series_jokes/utils/date_formater.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class JokeCard extends StatelessWidget {
   final Joke joke;
@@ -180,14 +181,24 @@ class JokeCard extends StatelessWidget {
             )));
   }
 
+  // _buildImageDisplay(String imageUrl) {
+  //   return SizedBox(
+  //       width: double.infinity,
+  //       child: FadeInImage.assetNetwork(
+  //         fit: BoxFit.fill,
+  //         placeholder: 'assets/images/pl.png',
+  //         image: imageUrl,
+  //       ));
+  // }
   _buildImageDisplay(String imageUrl) {
     return SizedBox(
         width: double.infinity,
-        child: FadeInImage.assetNetwork(
-          fit: BoxFit.fill,
-          placeholder: 'assets/images/pl.png',
-          image: imageUrl,
-        ));
+        child: CachedNetworkImage(
+        fit: BoxFit.fill,
+        imageUrl: imageUrl,
+        placeholder: (context, url) => Image.asset('assets/images/pl.png'),
+        errorWidget: (context, url, error) => Image.asset('assets/images/pl.png'),
+     ));
   }
 
   _buildTextDisplay(String jokeContent) {
