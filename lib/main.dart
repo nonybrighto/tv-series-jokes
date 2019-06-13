@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       child: BlocProvider<AuthBloc>(
         bloc: AuthBloc(authService: AuthService()),
         child: StreamBuilder<AppThemeType>(
-            initialData: AppThemeType.dark,
+            initialData: AppThemeType.light,
             stream: applicationBloc.appTheme,
             builder: (context, appThemeSnapshot) {
               return MaterialApp(
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         buttonColor: const Color(0XFFfc6b00),
         canvasColor: const Color(0XFF212845),
         dividerColor: const Color(0XFF676b67),
-        cardColor: const Color(0X252836),
+        cardColor: const Color(0XFF181e33),
         buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent));
   }
 
@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0XFF212845),
         accentColor: const Color(0XFFfc6b00),
         primarySwatch: Colors.orange,
-        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent));
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
+        scaffoldBackgroundColor: const Color(0XFFececec)
+        );
   }
 }

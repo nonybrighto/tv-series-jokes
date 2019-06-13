@@ -72,7 +72,7 @@ class JokeCard extends StatelessWidget {
             width: 5,
           ),
           ActionChip(label: Text(joke.movie.name, style: TextStyle(fontSize: 10),), padding:  EdgeInsets.all(0), onPressed: (){
-               gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
+                gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
           },),
       ],),
       trailing: _buildJokeMenuButton(context, jokeControlBloc, jokeListBloc),
@@ -167,7 +167,6 @@ class JokeCard extends StatelessWidget {
   _buildJokeFooter(
       BuildContext context, JokeControlBloc jokeControlBloc, Joke joke) {
     return Container(
-        color: Colors.grey[900],
         child: BlocProvider<JokeControlBloc>(
             bloc: jokeControlBloc,
             child: Row(

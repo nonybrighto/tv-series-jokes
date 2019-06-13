@@ -9,10 +9,10 @@ class ApplicationService{
     
        SharedPreferences pref = await SharedPreferences.getInstance();
        String themeTypeString = pref.getString(kAppThemeTypePrefKey);
-       if(themeTypeString == kAppThemeLight){
-         return AppThemeType.light;
+       if(themeTypeString == kAppThemeDark){
+         return AppThemeType.dark;
        }
-       return AppThemeType.dark;
+       return AppThemeType.light;
   }
 
   setDefaultThemeType(AppThemeType themeType) async{

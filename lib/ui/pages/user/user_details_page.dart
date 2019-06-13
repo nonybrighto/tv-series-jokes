@@ -226,7 +226,7 @@ class _UserDetailsPageState extends State<UserDetailsPage>
           children: <Widget>[
             Text(
               (count == null)?'...':count.toString(),
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             Text(title,
                 style: TextStyle(

@@ -130,7 +130,7 @@ class _MovieListPageState extends State<MovieListPage> {
           width: 120,
           height: 150,
           decoration: BoxDecoration(
-            color: Colors.white30,
+            color: (Theme.of(context).brightness == Brightness.dark)?Colors.white30:Colors.black26,
             image: (movie.getPosterUrl() != null)? DecorationImage(
               fit: BoxFit.fill,
               image: CachedNetworkImageProvider(movie.getPosterUrl()),
