@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
@@ -34,7 +33,7 @@ class JokeSaveUtil{
        File file = await cacheManager.getSingleFile(imageUrl);
 
        List<int> fileBytes = await file.readAsBytes();
-       File storageFile = File('$directoryPath/$name')..writeAsBytesSync(fileBytes);
+       File('$directoryPath/$name')..writeAsBytesSync(fileBytes);
        return true;
   }
 
