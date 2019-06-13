@@ -25,15 +25,13 @@ import 'package:tv_series_jokes/ui/pages/settings_page.dart';
 import 'package:tv_series_jokes/ui/pages/user/user_details_page.dart';
 import 'package:tv_series_jokes/ui/pages/user/user_list_page.dart';
 
-class Router{
 
 
-
-  static gotoHomePage(BuildContext context){
+   gotoHomePage(BuildContext context){
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
   }
 
-  static gotoUserDetailsPage(BuildContext context, User user, {UserListBloc userListBloc}){
+   gotoUserDetailsPage(BuildContext context, User user, {UserListBloc userListBloc}){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<UserDetailsBloc>(
           bloc: UserDetailsBloc(userService: UserService(), viewedUser: user),
           child: UserDetailsPage(user: user, userListBloc: userListBloc,),
@@ -42,45 +40,45 @@ class Router{
   }
 
 
-  static gotoMoviePage(BuildContext context){
+   gotoMoviePage(BuildContext context){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<MovieListBloc>(
           bloc: MovieListBloc(movieService:  MovieService()),
           child: MovieListPage(),
         )));
   }
-  static gotoMovieDetialsPage(BuildContext context, {Movie movie, MovieListBloc movieListBloc}){
+   gotoMovieDetialsPage(BuildContext context, {Movie movie, MovieListBloc movieListBloc}){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<MovieDetailsBloc>(
           bloc: MovieDetailsBloc(viewedMovie: movie, movieService:  MovieService(), movieListBloc: movieListBloc),
           child: MovieDetailsPage(movie: movie),
         )));
   }
-  static gotoAuthPage(BuildContext context, AuthType authType){
+   gotoAuthPage(BuildContext context, AuthType authType){
      Navigator.of(context).push(MaterialPageRoute(builder: (context) => AuthPage(authType)));
   }
-  static gotoAddJokePage(BuildContext context, {Movie selectedMovie}){
+   gotoAddJokePage(BuildContext context, {Movie selectedMovie}){
      Navigator.of(context).push(MaterialPageRoute(builder: (context) => JokeAddPage(selectedMovie: selectedMovie,)));
   }
-  static gotoSettingsPage(BuildContext context){
+   gotoSettingsPage(BuildContext context){
      Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsPage()));
   }
-  static gotoAboutPage(BuildContext context){
+   gotoAboutPage(BuildContext context){
      Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutPage()));
   }
 
-  static gotoJokeDisplayPage(BuildContext context, {int initialPage, JokeListBloc jokeListBloc, Joke joke}){
+   gotoJokeDisplayPage(BuildContext context, {int initialPage, JokeListBloc jokeListBloc, Joke joke}){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<JokeListBloc>(
       bloc: jokeListBloc,
       child: JokeDisplayPage(initialPage: initialPage, currentJoke: joke,),)));
   }
 
-  static gotoJokeCommentsPage(BuildContext context, {Joke joke, JokeListBloc jokeListBloc}){
+   gotoJokeCommentsPage(BuildContext context, {Joke joke, JokeListBloc jokeListBloc}){
 
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<JokeCommentListBloc>(
           bloc: JokeCommentListBloc(joke, jokeService: JokeService(), jokeListBloc:  jokeListBloc),
           child: JokeCommentPage(),
         )));
   }
-  static gotoJokeLikersPage(BuildContext context, {Joke joke}){
+   gotoJokeLikersPage(BuildContext context, {Joke joke}){
 
         UserListBloc userListBloc = UserListBloc(userService: UserService());
         userListBloc.fetchJokeLikers(joke);
@@ -89,7 +87,7 @@ class Router{
           child: UserListPage(showFollowDetails: false, title: 'Joke likers',),
         )));
   }
-  static gotoMovieFollowersPage(BuildContext context, {Movie movie}){
+   gotoMovieFollowersPage(BuildContext context, {Movie movie}){
 
         UserListBloc userListBloc = UserListBloc(userService: UserService());
         userListBloc.fetchMovieFollowers(movie);
@@ -99,7 +97,7 @@ class Router{
         )));
   }
 
-  static gotoUserFollowPage(BuildContext context, {User user, UserFollowType followType}){
+   gotoUserFollowPage(BuildContext context, {User user, UserFollowType followType}){
 
       UserListBloc userListBloc = UserListBloc(userService: UserService());
         userListBloc.fetchUserFollow(user, followType);
@@ -109,7 +107,7 @@ class Router{
         )));
 
   }
-  static gotoJokeListPage(BuildContext context, {User user, Movie movie, JokeListFetchType fetchType, String pageTitle}){
+   gotoJokeListPage(BuildContext context, {User user, Movie movie, JokeListFetchType fetchType, String pageTitle}){
 
         JokeListBloc jokeListBloc = JokeListBloc(user: user, movie: movie, fetchType: fetchType, jokeService: JokeService());
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocProvider<JokeListBloc>(
@@ -118,5 +116,3 @@ class Router{
         )));
 
   }
-
-}

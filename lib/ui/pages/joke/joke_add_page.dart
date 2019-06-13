@@ -266,7 +266,7 @@ class _JokeAddPageState extends State<JokeAddPage>
       content: Text('Joke successfully added!!'),
     ));
     await Future.delayed(Duration(seconds: 2));
-    Router.gotoJokeListPage(context, pageTitle: 'My Jokes', fetchType: JokeListFetchType.userJokes, user: currentUser);
+    gotoJokeListPage(context, pageTitle: 'My Jokes', fetchType: JokeListFetchType.userJokes, user: currentUser);
     return null;
   }
 }

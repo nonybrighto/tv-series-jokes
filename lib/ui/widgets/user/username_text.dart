@@ -15,7 +15,7 @@ class UsernameText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
           onTap: onPressed ?? (){
-              Router.gotoUserDetailsPage(context, user, userListBloc: BlocProvider.of<UserListBloc>(context));
+              gotoUserDetailsPage(context, user, userListBloc: BlocProvider.of<UserListBloc>(context));
           },
           child: Text(user.username, style: style ?? TextStyle(
              fontSize: 15,

@@ -14,7 +14,7 @@ class UserProfileIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
           onTap: onPressed ?? (){
-              Router.gotoUserDetailsPage(context, user, userListBloc: BlocProvider.of<UserListBloc>(context));
+              gotoUserDetailsPage(context, user, userListBloc: BlocProvider.of<UserListBloc>(context));
           },
           child: CircleAvatar(
           child: (user.profilePhoto == null)? Text(user.username.substring(0,1)) : null,

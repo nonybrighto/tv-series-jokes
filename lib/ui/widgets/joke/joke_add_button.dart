@@ -19,9 +19,9 @@ class JokeAddButton extends StatelessWidget {
           onPressed: (){
                   //The movie is used to initialize movie on the add page if the movie jokes is being viewed instead of having to search for it
                  if(isAuthenticatedSnapshot.data){
-                  Router.gotoAddJokePage(context, selectedMovie: selectedMovie); 
+                  gotoAddJokePage(context, selectedMovie: selectedMovie); 
                  }else{
-                   Router.gotoAuthPage(context, AuthType.login);
+                   gotoAuthPage(context, AuthType.login);
                  }
           },
         );
@@ -39,9 +39,9 @@ class JokeAddButton extends StatelessWidget {
     //       onPressed: (){
     //               //The movie is used to initialize movie on the add page if the movie jokes is being viewed instead of having to search for it
     //              if(isAuthenticatedSnapshot.data){
-    //               Router.gotoAddJokePage(context, selectedMovie: selectedMovie); 
+    //               gotoAddJokePage(context, selectedMovie: selectedMovie); 
     //              }else{
-    //                Router.gotoAuthPage(context, AuthType.login);
+    //                gotoAuthPage(context, AuthType.login);
     //              }
     //       },
     //     );

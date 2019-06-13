@@ -86,7 +86,7 @@ class UserCard extends StatelessWidget {
                       if(isAuthenticatedSnapshot.data){
                         userControlBloc.toggleUserFollow();
                       }else{
-                        Router.gotoAuthPage(context, AuthType.login);
+                        gotoAuthPage(context, AuthType.login);
                       }
                     },
                   );

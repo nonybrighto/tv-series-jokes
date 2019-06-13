@@ -206,11 +206,11 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             _countDetailBox('JOKES', movie.jokeCount, (){
-                 Router.gotoJokeListPage(context, pageTitle: movie.name, fetchType: JokeListFetchType.movieJokes, movie: movie);
+                 gotoJokeListPage(context, pageTitle: movie.name, fetchType: JokeListFetchType.movieJokes, movie: movie);
             }),
             Divider(color: Colors.grey[300]),
             _countDetailBox('FOLLOWERS', movie.followerCount, (){
-              Router.gotoMovieFollowersPage(context, movie: movie);
+              gotoMovieFollowersPage(context, movie: movie);
             }),
           ],
         ),
@@ -325,7 +325,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     if (isAuthenticatedSnapshot.data) {
                       movieControlBloc.toggleMovieFollow();
                     } else {
-                      Router.gotoAuthPage(context, AuthType.login);
+                      gotoAuthPage(context, AuthType.login);
                     }
                   }
                 : null,

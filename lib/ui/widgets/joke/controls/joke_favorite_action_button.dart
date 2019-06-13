@@ -33,7 +33,7 @@ class JokeFavoriteActionButton extends StatelessWidget {
                                 }
                             });
                           }else{
-                            Router.gotoAuthPage(context, AuthType.login);
+                            gotoAuthPage(context, AuthType.login);
                           }
                         });
                   }

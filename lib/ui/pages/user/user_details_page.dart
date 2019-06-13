@@ -200,7 +200,7 @@ class _UserDetailsPageState extends State<UserDetailsPage>
             title: 'Followers',
             count: user.followerCount,
             onPressed: () {
-              Router.gotoUserFollowPage(context,
+              gotoUserFollowPage(context,
                   user: user, followType: UserFollowType.followers);
             }),
         SizedBox(
@@ -210,7 +210,7 @@ class _UserDetailsPageState extends State<UserDetailsPage>
             title: 'Following',
             count: user.followingCount,
             onPressed: () {
-              Router.gotoUserFollowPage(context,
+              gotoUserFollowPage(context,
                   user: user, followType: UserFollowType.following);
             }),
       ],
@@ -264,7 +264,7 @@ class _UserDetailsPageState extends State<UserDetailsPage>
                             if (isAuthenticatedSnapshot.data) {
                               userControlBloc.toggleUserFollow();
                             } else {
-                              Router.gotoAuthPage(context, AuthType.login);
+                              gotoAuthPage(context, AuthType.login);
                             }
                           }
                         : null,

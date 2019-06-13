@@ -65,7 +65,7 @@ class _MovieListPageState extends State<MovieListPage> {
     return InkWell(
       splashColor: Colors.orange,
       onTap: () {
-        Router.gotoMovieDetialsPage(context,
+        gotoMovieDetialsPage(context,
             movie: movie, movieListBloc: _movieListBloc);
       },
       child: Card(
@@ -106,7 +106,7 @@ class _MovieListPageState extends State<MovieListPage> {
                   FlatButton(
                     child: Text('View Jokes'),
                     onPressed: () {
-                      Router.gotoJokeListPage(context, pageTitle: movie.name, fetchType: JokeListFetchType.movieJokes, movie: movie);
+                      gotoJokeListPage(context, pageTitle: movie.name, fetchType: JokeListFetchType.movieJokes, movie: movie);
                     },
                   )
                 ],

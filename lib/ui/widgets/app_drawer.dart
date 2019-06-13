@@ -85,11 +85,11 @@ class AppDrawer extends StatelessWidget {
           Row(
                 children: <Widget>[
                    _buildProfileDetail(context, title:'Followers', count:user.followerCount, onPressed: (){
-                      Router.gotoUserFollowPage(context,
+                      gotoUserFollowPage(context,
                   user: user, followType: UserFollowType.followers);
                    }),
                    _buildProfileDetail(context, title:'Following', count:user.followingCount, onPressed: (){
-                      Router.gotoUserFollowPage(context,
+                      gotoUserFollowPage(context,
                              user: user, followType: UserFollowType.following);
                    }),
                 ],
@@ -139,58 +139,58 @@ class AppDrawer extends StatelessWidget {
     return FlatButton(
       textColor: Theme.of(context).accentColor,
       child: Text(buttonText), onPressed: (){
-        Router.gotoAuthPage(context, authType);
+        gotoAuthPage(context, authType);
     });
   }
 
   _handleHomeTap(BuildContext context){
     return (){
-      Router.gotoHomePage(context);
+      gotoHomePage(context);
     };
   }
 
   _handleAllSitcomsTap(BuildContext context){
     return (){
-      Router.gotoMoviePage(context);
+      gotoMoviePage(context);
     };
   }
 
   _handleFavoritesTap(BuildContext context, bool isAuthenticated){
     return (){
       if(isAuthenticated){
-        Router.gotoJokeListPage(context, pageTitle: 'Favorite Jokes', fetchType: JokeListFetchType.userFavJokes);
+        gotoJokeListPage(context, pageTitle: 'Favorite Jokes', fetchType: JokeListFetchType.userFavJokes);
       }else{
-          Router.gotoAuthPage(context, AuthType.login);
+          gotoAuthPage(context, AuthType.login);
       }
     };
   }
   _handleCurrentUserJokesTap(BuildContext context, User currentUser){
     return (){
-       Router.gotoJokeListPage(context, pageTitle: 'My Jokes', fetchType: JokeListFetchType.userJokes, user: currentUser);
+       gotoJokeListPage(context, pageTitle: 'My Jokes', fetchType: JokeListFetchType.userJokes, user: currentUser);
     };
   }
 
   _handleAddJokeTap(BuildContext context){
     return (){
-      Router.gotoAddJokePage(context);
+      gotoAddJokePage(context);
     };
   }
 
   _handleSettingsTap(BuildContext context){
         return (){
-      Router.gotoSettingsPage(context);
+      gotoSettingsPage(context);
     };
   }
 
   _handleAboutTap(BuildContext context){
         return (){
-      Router.gotoAboutPage(context);
+      gotoAboutPage(context);
     };
   }
   _handleLogoutTap(BuildContext context, AuthBloc authBloc){
         return (){
         authBloc.logout();
-        Router.gotoHomePage(context);
+        gotoHomePage(context);
     };
   }
 

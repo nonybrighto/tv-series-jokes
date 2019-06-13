@@ -72,7 +72,7 @@ class JokeCard extends StatelessWidget {
             width: 5,
           ),
           ActionChip(label: Text(joke.movie.name, style: TextStyle(fontSize: 10),), padding:  EdgeInsets.all(0), onPressed: (){
-               Router.gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
+               gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
           },),
       ],),
       trailing: _buildJokeMenuButton(context, jokeControlBloc, jokeListBloc),
@@ -99,10 +99,10 @@ class JokeCard extends StatelessWidget {
           onSelected: (value) {
             switch (value) {
               case 'View Likes':
-                Router.gotoJokeLikersPage(context, joke: joke);
+                gotoJokeLikersPage(context, joke: joke);
                 break;
               case 'View Comments':
-                Router.gotoJokeCommentsPage(context, joke: joke, jokeListBloc: jokeListBloc);
+                gotoJokeCommentsPage(context, joke: joke, jokeListBloc: jokeListBloc);
                 break;
               case 'Delete':
                _showDeleteDialog(context, jokeControlBloc);
@@ -152,7 +152,7 @@ class JokeCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         jokeListBloc.changeCurrentJoke(joke);
-        Router.gotoJokeDisplayPage(context,
+        gotoJokeDisplayPage(context,
             initialPage: index, jokeListBloc: jokeListBloc, joke: joke);
       },
       child: Column(

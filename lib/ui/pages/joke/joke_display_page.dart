@@ -194,13 +194,13 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
               GestureDetector(
                 child: Text('${joke.commentCount} comments'),
                 onTap: () {
-                  Router.gotoJokeCommentsPage(context, joke: joke, jokeListBloc: jokeListBloc);
+                  gotoJokeCommentsPage(context, joke: joke, jokeListBloc: jokeListBloc);
                 },
               ),
               GestureDetector(
                 child: Text('${joke.likeCount} likes'),
                 onTap: () {
-                  Router.gotoJokeLikersPage(context, joke: joke);
+                  gotoJokeLikersPage(context, joke: joke);
                 },
               ),
             ],
