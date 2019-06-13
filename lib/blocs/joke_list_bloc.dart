@@ -12,10 +12,12 @@ import 'package:tv_series_jokes/services/joke_service.dart';
 class JokeListBloc extends ListBloc<Joke>{
  
  final JokeService jokeService;
+ final bool close;
 
   JokeListFetchType fetchType =JokeListFetchType.latestJokes;
   Movie movie;
   User user;
+  
 
   final _currentJokeController =BehaviorSubject<Joke>();
 
@@ -26,7 +28,7 @@ class JokeListBloc extends ListBloc<Joke>{
   //sinks
   void Function(Joke joke) get changeCurrentJoke => (joke) => _currentJokeController.sink.add(joke);
  
- JokeListBloc({this.jokeService, this.fetchType, this.user, this.movie}){
+ JokeListBloc({this.jokeService, this.fetchType, this.user, this.movie, this.close = true}){
 
     if(fetchType != null){
           getItems();
@@ -37,6 +39,13 @@ class JokeListBloc extends ListBloc<Joke>{
   @override
   void dispose() {
 
+      //The streams are not closed immediately after use when used in tabs because when they get closed
+      //and the tab is reopened, it prevents infinite scroll from working since contents can no longer be added
+      // to the stream. We will dispose the bloc in the widget instead. Still need a better solution tough.
+      if(close){
+        super.dispose();
+        _close();
+      }
   }
 
   @override
@@ -65,7 +74,7 @@ class JokeListBloc extends ListBloc<Joke>{
   }
 
 
-  close(){
+  _close(){
    _currentJokeController.close();
   }
 

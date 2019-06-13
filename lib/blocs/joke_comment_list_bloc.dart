@@ -44,6 +44,7 @@ class JokeCommentListBloc extends ListBloc<Comment>{
  
   @override
   void dispose() {
+        super.dispose();
       _jokeController.close();
   }
 

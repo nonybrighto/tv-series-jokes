@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tv_series_jokes/blocs/bloc_provider.dart';
 import 'package:tv_series_jokes/models/list_response.dart';
@@ -109,8 +110,8 @@ abstract class ListBloc<T> extends BlocBase {
   String getEmptyResultMessage();
 
   @override
+  @mustCallSuper
   void dispose() {
-        //TODO: remember to dispose super in subclasses later.
        _loadStateController.close();
       _itemsController.close();
       _getItemsController.close();

@@ -22,10 +22,6 @@ class MovieListBloc extends ListBloc<Movie>{
       super.getItems(); 
  }
  
-  @override
-  void dispose() {
-
-  }
 
   @override
   Future<MovieListResponse> fetchFromServer() async{

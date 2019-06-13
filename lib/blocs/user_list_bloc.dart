@@ -59,7 +59,7 @@ class UserListBloc extends ListBloc<User>{
  
   @override
   void dispose() {
-
+    super.dispose();
     _fetchjokeLikersController.close();
     _fetchUserFollowersController.close();
     _fetchUserFollowingController.close();

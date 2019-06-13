@@ -22,19 +22,24 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   int _selectedIndex = 0;
   PageController _pageController = PageController();
 
+  JokeService jokeService = JokeService();
+  JokeListBloc latestJokeListBloc;
+  JokeListBloc popularJokeListBloc;
 
   @override
   void initState() {
     super.initState();
+    latestJokeListBloc = JokeListBloc(jokeService: jokeService, fetchType: JokeListFetchType.latestJokes, close: false);
+    popularJokeListBloc = JokeListBloc(jokeService: jokeService, fetchType:  JokeListFetchType.popularJokes, close: false);
     _homeItems = [
                  BlocProvider<JokeListBloc>(
                     key: UniqueKey(),
-                    bloc: JokeListBloc(jokeService: JokeService(), fetchType: JokeListFetchType.latestJokes),
+                    bloc: latestJokeListBloc,
                     child: JokeList(pageStorageKey: PageStorageKey<String>('latest'),),
               ),
                  BlocProvider<JokeListBloc>(
                     key: UniqueKey(),
-                    bloc: JokeListBloc(jokeService: JokeService(), fetchType:  JokeListFetchType.popularJokes),
+                    bloc: popularJokeListBloc,
                     child: JokeList(pageStorageKey: PageStorageKey<String>('popular'),),
               ),
               
@@ -48,6 +53,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     super.didChangeDependencies();
     appBloc =BlocProvider.of<ApplicationBloc>(context);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +98,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   void dispose() {
-    print('homepage disposed');
-    _pageController.dispose();
     super.dispose();
+    _pageController.dispose();
+    latestJokeListBloc.dispose();
+    popularJokeListBloc.dispose();
+
   }
 }
