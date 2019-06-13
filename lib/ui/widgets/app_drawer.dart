@@ -197,8 +197,8 @@ class AppDrawer extends StatelessWidget {
   _handleShareTap(){ 
 
       return (){
-         Share.text('(TvSeriesJokes App)', 'Hey! Checkout some funny TV series jokes in TvSeriesJokes '+
-    ' Application!!! https://github.com/nonybrighto/tv-series-jokes', 'text/plain');
+         Share.text('(TvSeriesJokes App)', 'Hey! Checkout some funny TV series jokes on TvSeriesJokes!! '+
+    'https://github.com/nonybrighto/tv-series-jokes', 'text/plain');
 
       };
   }
