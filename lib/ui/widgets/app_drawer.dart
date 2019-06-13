@@ -32,7 +32,7 @@ class AppDrawer extends StatelessWidget {
                 ),
                 _drawerHeader(authBloc),
                 _drawerItem(context, Icons.home, 'Home' , onTap: _handleHomeTap(context)),
-                _drawerItem(context, Icons.movie, 'All Sitcoms' , onTap: _handleAllSitcomsTap(context)),
+                _drawerItem(context, Icons.movie, 'All TV Series' , onTap: _handleAllSeriesTap(context)),
                 _drawerItem(context, Icons.favorite, 'Favorites', onTap: _handleFavoritesTap(context, isAuthenticated)),
                 (isAuthenticated)?_drawerItem(context, Icons.favorite, 'My Jokes', onTap: _handleCurrentUserJokesTap(context, currentUser)):Container(),
                 _drawerItem(context, Icons.add_photo_alternate, 'Add Joke', onTap: _handleAddJokeTap(context)),
@@ -149,7 +149,7 @@ class AppDrawer extends StatelessWidget {
     };
   }
 
-  _handleAllSitcomsTap(BuildContext context){
+  _handleAllSeriesTap(BuildContext context){
     return (){
       gotoMoviePage(context);
     };

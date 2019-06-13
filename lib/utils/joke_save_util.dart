@@ -40,7 +40,7 @@ class JokeSaveUtil{
 
   Future<String> appDirectoryPath() async{
 
-    String appPath = (await getExternalStorageDirectory()).path+'/SitcomJokes';
+    String appPath = (await getExternalStorageDirectory()).path+'/TvSeriesJokes';
     Directory appDirectory = Directory(appPath);
     if( !(await appDirectory.exists())){
         await appDirectory.create();

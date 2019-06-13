@@ -1,6 +1,6 @@
 //General constants
 
-const String kAppName = 'Sitcom Jokes';
+const String kAppName = 'TvSeriesJokes';
 const String kAppApiUrl = 'http://192.168.43.122:3000/api/v1';
 const String kTmdbApiUrl = 'https://api.themoviedb.org/3';
 const String kTmdbImageUrl = "http://image.tmdb.org/t/p/";
