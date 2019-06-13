@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv_series_jokes/blocs/joke_comment_add_bloc.dart';
 import 'package:tv_series_jokes/blocs/joke_comment_list_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:tv_series_jokes/blocs/joke_list_bloc.dart';
 import 'package:tv_series_jokes/models/bloc_delegate.dart';
 import 'package:tv_series_jokes/models/comment.dart';
 import 'package:tv_series_jokes/models/joke.dart';
+import 'package:tv_series_jokes/models/joke_list_response.dart';
 import 'package:tv_series_jokes/services/joke_service.dart';
 import 'package:test/test.dart';
 
@@ -67,6 +69,12 @@ void main(){
           ..followerCount = 25
           ..followingCount = 22));
 
+
+           when(jokeService.fetchLatestJokes(page: anyNamed('page'))).thenAnswer((_) async => JokeListResponse((b) => b..totalPages = 2..currentPage = 1 ..perPage = 10 ..results = BuiltList<Joke>([joke]).toBuilder()));
+
+            when(jokeService.getComments(joke: anyNamed('joke'), page: anyNamed('page')))
+          .thenAnswer((_) async => Future.error(Exception('error'))); //dont add any content by default
+
     when(jokeService.addComment(joke: anyNamed('joke'), content: anyNamed('content'), anonymousName: anyNamed('anonymousName'))).thenAnswer((_) async => Comment((b) => 
                                     b..id = 1
                                     ..content = 'content'
@@ -74,8 +82,7 @@ void main(){
                                     ..owner = null
                                     ..createdAt = DateTime(2019)
                                   ));
-    JokeListBloc jokeListBloc = JokeListBloc(jokeService: jokeService);
-    jokeListBloc.itemsCache = [joke];
+    JokeListBloc jokeListBloc = JokeListBloc(jokeService: jokeService, fetchType: JokeListFetchType.latestJokes);
     JokeCommentListBloc jokeCommentListBloc = JokeCommentListBloc(joke, jokeService: jokeService, jokeListBloc: jokeListBloc);
     JokeCommentAddBloc jokeCommentAddBloc = JokeCommentAddBloc(jokeCommentListBloc: jokeCommentListBloc, jokeService: jokeService);
 
@@ -122,7 +129,7 @@ void main(){
 
           
           when(jokeService.getComments(joke: anyNamed('joke'), page: anyNamed('page')))
-          .thenAnswer((_) async => Future.error(Error()));
+          .thenAnswer((_) async => Future.error(Exception('error')));
           when(jokeService.addComment(joke: anyNamed('joke'), content: anyNamed('content'), anonymousName: anyNamed('anonymousName'))).thenAnswer((_) async => Comment((b) => 
                                     b..id = 1
                                     ..content = 'content'
@@ -133,8 +140,9 @@ void main(){
 
 
 
-    JokeListBloc jokeListBloc = JokeListBloc(jokeService: jokeService);
-    jokeListBloc.itemsCache = [joke];
+      when(jokeService.fetchLatestJokes(page: anyNamed('page'))).thenAnswer((_) async => JokeListResponse((b) => b..totalPages = 2..currentPage = 1 ..perPage = 10 ..results = BuiltList<Joke>([joke]).toBuilder()));
+    JokeListBloc jokeListBloc = JokeListBloc(jokeService: jokeService, fetchType: JokeListFetchType.latestJokes);
+    
     JokeCommentListBloc jokeCommentListBloc = JokeCommentListBloc(joke, jokeService: jokeService, jokeListBloc: jokeListBloc);
     JokeCommentAddBloc jokeCommentAddBloc = JokeCommentAddBloc(jokeCommentListBloc: jokeCommentListBloc, jokeService: jokeService);
     jokeCommentAddBloc.addComment('hello', null, (added, message){

@@ -29,10 +29,9 @@ class JokeAddBloc extends BlocBase{
                 await  jokeService.addJoke(jokeUploadDetails: jokeUploadDetails);
                 _loadStateController.sink.add(Loaded());
                 delegate.success(null);
-            }catch(err){
-                String errorMessage = err.toString();
-                delegate.error(errorMessage);
-                _loadStateController.sink.add(LoadError(errorMessage));
+            }catch(error){
+                delegate.error(error.message);
+                _loadStateController.sink.add(LoadError(error.message));
             }
         });
 

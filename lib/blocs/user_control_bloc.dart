@@ -28,7 +28,7 @@ class UserControlBloc extends BlocBase{
       _updateUsersInControlledBlocs();
       try{
           await userService.changeUserFollow(user: userControlled, follow:userControlled.followed);
-      }catch(err){
+      }catch(error){
         _toggleFollow();
         _updateUsersInControlledBlocs();
       } 

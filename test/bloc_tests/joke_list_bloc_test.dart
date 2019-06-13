@@ -112,7 +112,7 @@ void main() {
     when(jokeService.fetchLatestJokes(
         page: anyNamed('page'),
         ))
-        .thenAnswer((_) async => Future.error(Error()));
+        .thenAnswer((_) async => Future.error(Exception('error')));
 
     JokeListBloc imageJokeListBloc =
     JokeListBloc( jokeService: jokeService, fetchType: JokeListFetchType.latestJokes);

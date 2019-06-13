@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/services/auth_header.dart';
+import 'package:tv_series_jokes/services/error_handler.dart';
 
 import '../constants/constants.dart';
 
@@ -56,12 +57,8 @@ class AuthService {
       response = await dio.post(authUrl+'register',
           data: {'username': username, 'email': email, 'password': password});
      return _handleAuthResponse(response);
-    } on DioError catch (error) {
-      if (error.response != null) {
-        throw Exception(error.response.data['message']);
-      } else {
-        throw Exception('Error connecting to server!');
-      }
+    } catch(error){
+        return handleError(error: error, message: 'signing up');  
     }
   }
 
@@ -72,12 +69,8 @@ class AuthService {
       response = await dio.post(authUrl + 'login',
           data: {'username': loginDetial, 'password': password});
       return _handleAuthResponse(response);
-    } on DioError catch (error) {
-      if (error.response != null) {
-        throw Exception(error.response.data['message']);
-      } else {
-        throw Exception('Error connecting to server!');
-      }
+    }  catch(error){
+        return handleError(error: error, message: 'signing in');  
     }
   }
   Future<User> refreshToken() async {
@@ -87,12 +80,8 @@ class AuthService {
       Options authHeaderOption = await getAuthHeaderOption();
       response = await dio.get(authUrl + 'refresh', options: authHeaderOption);
       return _handleAuthResponse(response);
-    } on DioError catch (error) {
-      if (error.response != null) {
-        throw Exception(error.response.data['message']);
-      } else {
-        throw Exception('Error connecting to server!');
-      }
+    }  catch(error){
+        return handleError(error: error, message: 'refreshing token');  
     }
   }
   Future<User> fetchAuthenticatedUser() async {
@@ -102,12 +91,8 @@ class AuthService {
       Options authHeaderOption = await getAuthHeaderOption();
       response = await dio.get(userUrl, options: authHeaderOption);
       return _handleAuthResponse(response);
-    } on DioError catch (error) {
-      if (error.response != null) {
-        throw Exception(error.response.data['message']);
-      } else {
-        throw Exception('Error connecting to server!');
-      }
+    }  catch(error){
+        return handleError(error: error, message: 'fetching authenticated user');  
     }
   }
   
@@ -119,12 +104,8 @@ class AuthService {
       response = await dio.post(authUrl + 'facebook/token',
           data: {'access_token': accessToken});
      return _handleAuthResponse(response);
-    } catch (error) {
-      if (error.response != null) {
-        throw Exception(error.response.data['message']);
-      } else {
-        throw Exception('Error connecting to server!');
-      }
+    }  catch(error){
+        return handleError(error: error, message: 'authenticating with facebook');  
     }
   }
 
@@ -135,12 +116,8 @@ class AuthService {
       response =
           await dio.post(authUrl + 'google/token', data: {'id_token': idToken});
       return _handleAuthResponse(response);
-    } catch (error) {
-      if (error.response != null) {
-        throw Exception(error.response.data['message']);
-      } else {
-        throw Exception('Error connecting to server');
-      }
+    }  catch(error){
+        return handleError(error: error, message: 'authenticating with google');  
     }
   }
 

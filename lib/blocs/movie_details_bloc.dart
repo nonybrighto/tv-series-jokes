@@ -47,8 +47,8 @@ class MovieDetailsBloc extends BlocBase{
             _movieController.sink.add(movieGotten);
             _updateMovieInList(movieGotten);
             _loadStateController.sink.add(Loaded());
-        }catch(err){
-            _loadStateController.sink.add(LoadError('Could not get MovieDetails'));
+        }catch(error){
+            _loadStateController.sink.add(LoadError(error.message));
         }
   }
 

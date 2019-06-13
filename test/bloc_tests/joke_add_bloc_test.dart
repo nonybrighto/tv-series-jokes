@@ -58,7 +58,7 @@ void main(){
   test('expect to return error when joke add fails', ()async{
 
     when(jokeService.addJoke(jokeUploadDetails:anyNamed('jokeUploadDetails')))
-        .thenAnswer((_) async =>  Future.error('error occured'));
+        .thenAnswer((_) async =>  Future.error(Exception('error occured')));
 
     DelegateMock delegateMock = new DelegateMock();
     JokeAddBloc jokeAddBloc = JokeAddBloc(jokeService: jokeService, delegate: delegateMock);

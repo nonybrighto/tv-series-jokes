@@ -9,6 +9,7 @@ import 'package:tv_series_jokes/models/movie/movie.dart';
 import 'package:tv_series_jokes/models/user.dart';
 import 'package:tv_series_jokes/models/user_list_response.dart';
 import 'package:tv_series_jokes/services/auth_header.dart';
+import 'package:tv_series_jokes/services/error_handler.dart';
 import 'package:tv_series_jokes/utils/image_compressor.dart';
 import '../constants/constants.dart';
 
@@ -33,10 +34,8 @@ Future<User> getUser(User user) async{
        Options authHeaderOption = await getAuthHeaderOption();
        Response response = await dio.get(usersUrl + '${user.id}', options: authHeaderOption);
       return User.fromJson(response.data);
-    } on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
+    } catch(error){
+        return handleError(error: error, message: 'getting user\'s details');  
     }
 }
 
@@ -47,10 +46,8 @@ Future<UserListResponse> fetchJokeLikers({Joke jokeLiked, int page}) async{
        Options authHeaderOption = await getAuthHeaderOption();
        Response response = await dio.get(jokesUrl + '${jokeLiked.id}/likes?page=$page', options: authHeaderOption);
       return UserListResponse.fromJson(response.data);
-    } on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
+    }catch(error){
+        return handleError(error: error, message: 'fetching joke likers');  
     }
    
 }
@@ -64,25 +61,22 @@ Future<bool> changeUserFollow({User user, bool follow}) async{
               await dio.delete(usersUrl + '${user.id}/followers', options: authHeaderOption);
           }
           return true;
-        } on DioError catch (error) {
-          throw Exception((error.response != null)
-              ? error.response.data['message']
-              : 'Error Connectiing to server');
+        }catch(error){
+          return handleError(error: error, message: 'toggling user follow');  
         }
 
 }
 
 Future<UserListResponse> fetchUserFollow({User user, int page, UserFollowType userFollowType}) async{
 
+      String followTypeString;
      try {
-       String followTypeString = (userFollowType == UserFollowType.followers)?'followers':'following';
+       followTypeString = (userFollowType == UserFollowType.followers)?'followers':'following';
        Options authHeaderOption = await getAuthHeaderOption();
        Response response = await dio.get(usersUrl + '${user.id}/$followTypeString?page=$page', options: authHeaderOption);
       return UserListResponse.fromJson(response.data);
-    } on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
+    }catch(error){
+        return handleError(error: error, message: 'fetching $followTypeString');  
     }
   
 }
@@ -92,11 +86,9 @@ Future<UserListResponse> fetchMovieFollowers({Movie movie, int page}) async{
        Options authHeaderOption = await getAuthHeaderOption();
        Response response = await dio.get(moviesUrl + '${movie.id}/followers?page=$page', options: authHeaderOption);
       return UserListResponse.fromJson(response.data);
-    } on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
-    }
+    }catch(error){
+        return handleError(error: error, message: 'fetching movie followers');  
+    } 
   
 }
 
@@ -112,11 +104,9 @@ Future<User> changeUserPhoto({File photo}) async{
           data: responseData, options: authHeaderOption);
           updateUserPhotoPreference(response.data['profilePhoto']);
           return User.fromJson(response.data);
-    }on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
-    }
+    }catch(error){
+        return handleError(error: error, message: 'changing photo');  
+    } 
 }
 
 updateUserPhotoPreference(String photoUrl) async{

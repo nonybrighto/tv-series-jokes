@@ -78,10 +78,9 @@ class AuthPageBloc extends BlocBase {
       authBloc.changeCurrentUser(user);
       _loadStateController.sink.add(Loaded());
       callBackFunction(true, '');
-    } catch (appError) {
-      String errorMessage = appError.toString();
-      _loadStateController.sink.add(LoadError(errorMessage));
-      callBackFunction(false, errorMessage);
+    } catch (error) {
+      _loadStateController.sink.add(LoadError(error.message));
+      callBackFunction(false, error.message);
     }
   }
  

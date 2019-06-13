@@ -117,7 +117,7 @@ void main() {
 
      JokeService jokeService = MockJokeService();
     when(jokeService.getComments(joke: anyNamed('joke'), page: anyNamed('page')))
-        .thenAnswer((_) async => Future.error(Error()));
+        .thenAnswer((_) async => Future.error(Exception('error')));
 
     JokeCommentListBloc commentListBloc = JokeCommentListBloc(joke, jokeService: jokeService);
     expect(commentListBloc.loadState, emitsInOrder([loading, loadError]));

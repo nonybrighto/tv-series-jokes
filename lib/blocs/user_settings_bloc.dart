@@ -34,7 +34,7 @@ class UserSettingsBloc extends BlocBase{
               userDetailsBloc?.updateUser(updatedUser);
               _loadStateController.sink.add(LoadEnd());
             }catch(error){
-              _loadStateController.sink.add(LoadError('Error'));
+              _loadStateController.sink.add(LoadError(error.message));
             }
       });
   }

@@ -66,7 +66,7 @@ class JokeControlBloc extends BlocBase {
             await jokeService.reportJoke(joke: jokeControlled);
             deleteCallback('Joke has been reported!');
         }catch(error){
-            deleteCallback('Error: Failed to report joke!');
+            deleteCallback(error.message);
         }
     
   }
@@ -79,7 +79,7 @@ class JokeControlBloc extends BlocBase {
             jokeListBloc.deleteItem(jokeControlled);
             deleteCallback('Joke has been deleted!');
         }catch(error){
-            deleteCallback('Error: Failed to delete joke!!!');
+            deleteCallback(error.message);
         }
     
   }
@@ -103,7 +103,7 @@ class JokeControlBloc extends BlocBase {
       await JokeSaveUtil().saveImage(jokeControlled.imageUrl, jokeControlled.title,
           jokeControlled.getImageExtension());
       saveCallback('Joke has been saved!!');
-    } catch (err) {
+    } catch (error) {
       saveCallback('Failed to save joke!!');
     }
 
@@ -118,7 +118,7 @@ class JokeControlBloc extends BlocBase {
     try {
       await JokeSaveUtil().saveText(jokeImage, jokeControlled.title);
       saveCallback('Joke has been saved!!');
-    } catch (err) {
+    } catch (error) {
       saveCallback('Failed to save joke!!');
     }
 
@@ -133,10 +133,9 @@ class JokeControlBloc extends BlocBase {
       await jokeService.changeJokeLiking(
           joke: jokeControlled, like: jokeControlled.liked);
       likeCallback(true, 'Joke has been liked!');
-    } catch (err) {
-      print(err);
+    } catch (error) {
       _toggleLike();
-      likeCallback(false, err.message);
+      likeCallback(false, error.message);
       jokeListBloc?.updateItem(jokeControlled);
       jokeListBloc?.changeCurrentJoke(jokeControlled);
     }
@@ -150,9 +149,9 @@ class JokeControlBloc extends BlocBase {
       await jokeService.changeJokeFavoriting(
           joke: jokeControlled, favorite: jokeControlled.favorited);
           favoriteCallback(true, 'Joke has been added to favorite!');
-    } catch (err) {
+    } catch (error) {
       _toggleFavorite();
-      favoriteCallback(false, err.message);
+      favoriteCallback(false, error.message);
       jokeListBloc?.updateItem(jokeControlled);
       jokeListBloc?.changeCurrentJoke(jokeControlled);
     }

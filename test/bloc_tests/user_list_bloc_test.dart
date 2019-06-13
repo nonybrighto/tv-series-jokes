@@ -37,6 +37,7 @@ void main(){
 
   test('expect to fetch joke likers', ()async{
 
+        when(userService.fetchJokeLikers(jokeLiked: anyNamed('jokeLiked'), page: anyNamed('page'))).thenAnswer((_) async => UserListResponse((b) => b..totalPages = 2..currentPage = 1 ..perPage = 10 ..results =  sampleUsers.toBuilder()));
         UserListBloc userListBloc =
     UserListBloc(userService: userService);
 
@@ -48,6 +49,7 @@ void main(){
   });
   test('expect to fetch movie followers', ()async{
 
+        when(userService.fetchMovieFollowers(movie: anyNamed('movie'), page: anyNamed('page'))).thenAnswer((_) async => UserListResponse((b) => b..totalPages = 2..currentPage = 1 ..perPage = 10 ..results =  sampleUsers.toBuilder()));
         UserListBloc userListBloc =
     UserListBloc(userService: userService);
     userListBloc.fetchMovieFollowers(null);

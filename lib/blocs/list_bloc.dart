@@ -80,13 +80,7 @@ abstract class ListBloc<T> extends BlocBase {
 
       currentPage++;
     } catch (err) {
-      if (currentPage == 1) {
-        _loadStateController.sink
-            .add(LoadError('Error during the loading of item'));
-      } else {
-        _loadStateController.sink
-            .add(LoadMoreError('Error while loading more items'));
-      }
+       _loadStateController.sink.add(LoadError(err.message));
     }
   }
 

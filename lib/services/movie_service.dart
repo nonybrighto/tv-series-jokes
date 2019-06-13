@@ -8,6 +8,7 @@ import 'package:tv_series_jokes/models/movie/movie_list_response.dart';
 import 'package:tv_series_jokes/models/movie/tmdb_movie.dart';
 import 'package:tv_series_jokes/models/movie/tmdb_movie_list_response.dart';
 import 'package:tv_series_jokes/services/auth_header.dart';
+import 'package:tv_series_jokes/services/error_handler.dart';
 
 class MovieService{
 
@@ -25,10 +26,8 @@ class MovieService{
       Response response = await dio.get(moviesUrl + '?page=$page', options: authHeaderOption);
         return MovieListResponse.fromJson(response.data);
 
-    } on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
+    }  catch(error){
+        return handleError(error: error, message: 'getting movies');  
     }
   }
 
@@ -44,10 +43,8 @@ class MovieService{
       Movie gottenMovie =  Movie.fromJson(response[1].data);
       return gottenMovie.rebuild((b) => b.tmdbDetails = tmdbMovieDetails.toBuilder());
 
-    } on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
+    }catch(error){
+        return handleError(error: error, message: 'getting movie');  
     }
    
   }
@@ -62,10 +59,8 @@ class MovieService{
               await dio.delete(moviesUrl + '${movie.id}/followers', options: authHeaderOption);
           }
           return true;
-        } on DioError catch (error) {
-          throw Exception((error.response != null)
-              ? error.response.data['message']
-              : 'Error Connectiing to server');
+        }catch(error){
+          return handleError(error: error, message: 'toggling movie follow');  
         }
   }
   
@@ -76,10 +71,8 @@ class MovieService{
       Response response = await dio.get(tmdbSearchMovieUrl + '?api_key=$kTmdbApiKey&query=$searchString&page=$page', options: authHeaderOption);
         return TmdbMovieListResponse.fromJson(response.data);
 
-    } on DioError catch (error) {
-      throw Exception((error.response != null)
-          ? error.response.data['message']
-          : 'Error Connectiing to server');
+    }catch(error){
+        return handleError(error: error, message: 'searching for movie');  
     }
   }
 
@@ -90,7 +83,7 @@ class MovieService{
         return searchedMovie.results.toList();
 
     }catch(error){
-     throw Exception('Error while getting movie');
+        return handleError(error: error, message: 'searching for movie');  
     }
 
   }

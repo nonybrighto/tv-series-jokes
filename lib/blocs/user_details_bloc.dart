@@ -44,8 +44,8 @@ class  UserDetailsBloc extends BlocBase {
              viewedUser  = userGotten;
             _userController.sink.add(userGotten);
             _loadStateController.sink.add(Loaded());
-        }catch(err){
-            _loadStateController.sink.add(LoadError('Could not get user Details'));
+        }catch(error){
+            _loadStateController.sink.add(LoadError(error.message));
         }
   }
 

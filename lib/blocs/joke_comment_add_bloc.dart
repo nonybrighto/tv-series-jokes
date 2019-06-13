@@ -34,8 +34,8 @@ class JokeCommentAddBloc extends BlocBase{
                 _loadStateContoller.sink.add(Loaded());
                 commentAddCallback(true, 'Comment Added'); 
            }catch(error){
-                commentAddCallback(false, 'Failed to add Comment');
-                _loadStateContoller.sink.add(LoadError('Failed to add Comment'));
+                commentAddCallback(false, error.message);
+                _loadStateContoller.sink.add(LoadError(error.message));
            }
       });
 

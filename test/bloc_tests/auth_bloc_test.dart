@@ -49,7 +49,7 @@ void main(){
 
   test('call error delegate when error in login process', () async{
 
-    when(authService.signInWithEmailAndPassword('john@email.com', 'password123')).thenAnswer((_)  =>  Future.error('error occured'));
+    when(authService.signInWithEmailAndPassword('john@email.com', 'password123')).thenAnswer((_)  =>  Future.error(Exception('error occured')));
 
     AuthBloc authBloc = AuthBloc(authService: authService);
     AuthPageBloc authPageBloc = AuthPageBloc(authBloc: authBloc);
