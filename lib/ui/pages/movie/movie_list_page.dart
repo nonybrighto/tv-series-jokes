@@ -28,7 +28,7 @@ class _MovieListPageState extends State<MovieListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Sitcoms'),
+        title: Text('All TV series'),
       ),
       body: ScrollList<Movie>(
         scrollListType: ScrollListType.list,
@@ -55,7 +55,7 @@ class _MovieListPageState extends State<MovieListPage> {
             right: 0,
             child: _buildMovieDetails(movie),
           ),
-          _buildMovieImage(movie.getPosterUrl()),
+          _buildMovieImage(movie),
         ],
       ),
     );
@@ -118,20 +118,25 @@ class _MovieListPageState extends State<MovieListPage> {
     );
   }
 
-  _buildMovieImage(String posterUrl) {
-    posterUrl = posterUrl == null ? '':posterUrl; 
+  _buildMovieImage(Movie movie) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: Container(
-        width: 120,
-        height: 150,
-        decoration: BoxDecoration(
-          color: Colors.white30,
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: CachedNetworkImageProvider(posterUrl),
+      child: GestureDetector(
+              onTap: (){
+                gotoMovieDetialsPage(context,
+                 movie: movie, movieListBloc: _movieListBloc);
+              },
+              child: Container(
+          width: 120,
+          height: 150,
+          decoration: BoxDecoration(
+            color: Colors.white30,
+            image: (movie.getPosterUrl() != null)? DecorationImage(
+              fit: BoxFit.fill,
+              image: CachedNetworkImageProvider(movie.getPosterUrl()),
+            ): null,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
     );
