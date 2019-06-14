@@ -206,8 +206,8 @@ class _JokeAddPageState extends State<JokeAddPage>
           labelText: 'Joke Text',
           ),
           validator: (value){
-            if(value.trim().isNotEmpty &&  value.trim().length < 30){
-              return 'Joke Should be more than 20 characters';
+            if(value.trim().isNotEmpty &&  value.trim().length < 10){
+              return 'Joke Should be more than 10 characters';
             }
           },
     );

@@ -31,11 +31,11 @@ class _AuthPageState extends State<AuthPage>{
   AuthPageBloc authPageBloc;
 
   TextEditingController _usernameController =
-      TextEditingController(text: 'larry');
+      TextEditingController(text: '');
   TextEditingController _emailController =
-      TextEditingController(text: 'larry@gmail.com');
+      TextEditingController(text: '');
   TextEditingController _passwordController =
-      TextEditingController(text: 'tested69#');
+      TextEditingController(text: '');
 
   @override
   void initState() {
