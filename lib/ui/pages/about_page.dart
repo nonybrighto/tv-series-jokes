@@ -10,8 +10,10 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
+
   @override
   Widget build(BuildContext context) {
+    String logoName = (Theme.of(context).brightness == Brightness.dark)?'logo_light':'logo_dark';
     return Scaffold(
         appBar: AppBar(
           title: Text('About'),
@@ -23,16 +25,14 @@ class _AboutPageState extends State<AboutPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                (Theme.of(context).brightness == Brightness.dark)
-                    ? Image.asset('assets/images/icon_light.png')
-                    : Image.asset('assets/images/icon_dark.png'),
+                Image.asset('assets/images/$logoName.png', width: 250,),
                 Text(
                   'Designed By nonybrighto',
                   style: TextStyle(fontSize: 23),
                 ),
                 Text(
                   'A big fan of TV Series sitcoms such as The Simpsons, ' +
-                      'Friends, The Bigbang Theory, How I Met Your Mother, ' +
+                      'Friends, The Big Bang Theory, How I Met Your Mother, ' +
                       'Two and A Half Men, The Good Place, etc.',
                   textAlign: TextAlign.center,
                 ),

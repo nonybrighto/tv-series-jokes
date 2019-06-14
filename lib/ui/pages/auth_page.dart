@@ -106,10 +106,12 @@ class _AuthPageState extends State<AuthPage>{
                               Color(0Xfffa7c05),
                               Color(0Xffee3e00)
                             ])),
-
-                            child:  Image.asset('assets/images/icon_light.png'),
                       ),
                     ),
+                    Center(child: Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: Image.asset('assets/images/logo_light.png',width: 250,),
+                    ))
                   ],
                 );
   }
