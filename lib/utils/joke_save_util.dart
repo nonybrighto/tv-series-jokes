@@ -22,7 +22,7 @@ class JokeSaveUtil{
       var pngBytes = byteData.buffer.asUint8List();
       String directoryPath = await appDirectoryPath();
       File imgFile =new File('$directoryPath/$name');
-      imgFile.writeAsBytes(pngBytes);
+      await imgFile.writeAsBytes(pngBytes);
   }
 
   saveImage(String imageUrl, String fileName, extension) async{
