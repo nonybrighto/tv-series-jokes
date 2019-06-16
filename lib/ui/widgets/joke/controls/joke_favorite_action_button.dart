@@ -22,6 +22,7 @@ class JokeFavoriteActionButton extends StatelessWidget {
                     return JokeActionButton(
                         title: 'Favorite',
                         icon: Icons.favorite,
+                        iconColor: iconColor,
                         selected: joke.favorited,
                         size: size,
                         onTap: () {

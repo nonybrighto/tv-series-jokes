@@ -48,7 +48,53 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
         jokeService: JokeService());
   }
 
-  void _scrollListener() {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<Joke>(
+      stream: jokeListBloc.currentJoke,
+      builder: (context, currentJokeSnapshot) {
+        Joke currentJoke = currentJokeSnapshot.data;
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(currentJoke != null? currentJoke.title : 'Joke'),
+          ),
+          backgroundColor: (currentJoke != null && currentJoke.hasImage())?Colors.black: Theme.of(context).scaffoldBackgroundColor,
+          body: StreamBuilder<LoadState>(
+              initialData: Loading(),
+              stream: jokeListBloc.loadState,
+              builder: (BuildContext context, AsyncSnapshot<LoadState> snapshot) {
+                LoadState loadState = snapshot.data;
+                if (loadState is LoadComplete && !(loadState is ErrorLoad)) {
+                  canLoadMore = true;
+                }
+
+                return StreamBuilder<UnmodifiableListView<Joke>>(
+                  stream: jokeListBloc.items,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<UnmodifiableListView<Joke>> jokesSnapshot) {
+                    
+                        return Stack(
+                          children: <Widget>[
+                            _jokeSlide(jokesSnapshot.data),
+                            Positioned(
+                              bottom: 0.0,
+                              left: 0.0,
+                              right: 0.0,
+                              child: (currentJoke != null)
+                                        ? _jokeOptions(currentJoke, context)
+                                        : Container(),
+                            ),
+                          ],
+                        );
+                      },
+                );
+              }),
+        );
+      }
+    );
+  }
+
+   void _scrollListener() {
     if (_pageController.position.extentAfter < 2000 && canLoadMore) {
       print("Load more stuffs");
       jokeListBloc.getItems();
@@ -119,66 +165,14 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
             },
             itemBuilder: (BuildContext context, int index) {
               Joke joke = jokes[index];
-              if (joke.hasImage()) {
-                return _displayImageJoke(joke);
-              } else {
-                return _displayTextJoke(joke);
-              }
+
+              return Padding(
+                padding: EdgeInsets.only(bottom: 100, top: 10),
+                child: joke.hasImage()?  _displayImageJoke(joke): _displayTextJoke(joke),
+              );
             },
           )
         : CircularProgressIndicator();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: StreamBuilder<Joke>(
-          initialData: null,
-          stream: jokeListBloc.currentJoke,
-          builder: (BuildContext context, AsyncSnapshot<Joke> jokeSnapshot) {
-            String title =
-                (jokeSnapshot.data != null) ? jokeSnapshot.data.title : 'Joke';
-            return Text(title);
-          },
-        ),
-      ),
-      body: StreamBuilder<LoadState>(
-          initialData: Loading(),
-          stream: jokeListBloc.loadState,
-          builder: (BuildContext context, AsyncSnapshot<LoadState> snapshot) {
-            LoadState loadState = snapshot.data;
-            if (loadState is LoadComplete && !(loadState is ErrorLoad)) {
-              canLoadMore = true;
-            }
-
-            return StreamBuilder<UnmodifiableListView<Joke>>(
-              stream: jokeListBloc.items,
-              builder: (BuildContext context,
-                  AsyncSnapshot<UnmodifiableListView<Joke>> jokesSnapshot) {
-                
-                    return Stack(
-                      children: <Widget>[
-                        _jokeSlide(jokesSnapshot.data),
-                        Positioned(
-                          bottom: 0.0,
-                          left: 0.0,
-                          right: 0.0,
-                          child: StreamBuilder<Joke>(
-                              stream: jokeListBloc.currentJoke,
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<Joke> jokeSnapshot) {
-                                return (jokesSnapshot.hasData)
-                                    ? _jokeOptions(jokeSnapshot.data, context)
-                                    : Container();
-                              }),
-                        ),
-                      ],
-                    );
-                  },
-            );
-          }),
-    );
   }
 
   _jokeOptions(Joke joke, BuildContext context) {
@@ -192,13 +186,13 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               GestureDetector(
-                child: Text('${joke.commentCount} comments'),
+                child: Text('${joke.commentCount} comments', style: TextStyle(color: iconColor),),
                 onTap: () {
                   gotoJokeCommentsPage(context, joke: joke, jokeListBloc: jokeListBloc);
                 },
               ),
               GestureDetector(
-                child: Text('${joke.likeCount} likes'),
+                child: Text('${joke.likeCount} likes', style: TextStyle(color: iconColor)),
                 onTap: () {
                   gotoJokeLikersPage(context, joke: joke);
                 },
@@ -214,7 +208,7 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
           children: <Widget>[
               
               JokeLikeActionButton(joke: joke, iconColor: iconColor,),
-              JokeSaveActionButton(joke: joke, textJokeBoundaryKey: textJokeBoundaryKey, ),
+              JokeSaveActionButton(joke: joke, textJokeBoundaryKey: textJokeBoundaryKey, iconColor: iconColor, ),
               JokeFavoriteActionButton(joke: joke,iconColor: iconColor,),
               JokeShareActionButton(joke: joke, iconColor: iconColor,),
           ],

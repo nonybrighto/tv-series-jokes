@@ -28,6 +28,7 @@ class JokeSaveActionButton extends StatelessWidget {
                       return JokeActionButton(
                           title: 'Save' + extraSaveText,
                           icon: Icons.arrow_downward,
+                          iconColor: iconColor,
                           selected: false,
                           size: size,
                           onTap: () async {

@@ -27,6 +27,7 @@ class JokeShareActionButton extends StatelessWidget {
                       return JokeActionButton(
                           title: 'Share' + extraShareText,
                           icon: Icons.share,
+                          iconColor: iconColor,
                           selected: false,
                           size: size,
                           onTap: () {
