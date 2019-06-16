@@ -86,7 +86,7 @@ class JokeCard extends StatelessWidget {
       builder: (context, currentUserSnapshot) {
         User currentUser = currentUserSnapshot.data;
         List<String> menuChoices = ['View Likes', 'View Comments','Delete', 'Report Content'];
-        if(currentUser!=null && currentUser.id != joke.owner.id){
+        if(currentUser == null || currentUser.id != joke.owner.id){
               int index = menuChoices.indexWhere((choice) => choice == 'Delete');
               menuChoices.removeAt(index);
         }
@@ -194,6 +194,7 @@ class JokeCard extends StatelessWidget {
   _buildTextDisplay(String jokeContent) {
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+      width: double.infinity,
       child: Text(jokeContent),
     );
   }
