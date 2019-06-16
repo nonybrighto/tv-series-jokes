@@ -150,7 +150,7 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
               title: Text(content.substring(0, 47) + '...'),
               children: <Widget>[Text(content)],
             )
-          : Text(content),
+          : Text(content, style: TextStyle(color: Colors.white),),
     );
   }
 
