@@ -128,16 +128,23 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
     return ListView(
       
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(
-              top: 8.0, left: 8.0, right: 8.0, bottom: 40.0),
-          child: Text(
-            joke.text,
-            textAlign: TextAlign.justify,
-            style: TextStyle(
-              fontSize: 22.0,
+        RepaintBoundary(
+          key: textJokeBoundaryKey,
+                    child: ConstrainedBox(
+                        constraints: const BoxConstraints(minHeight: 200),
+                                          child: Container(
+                        padding: EdgeInsets.all(8.0),
+                        
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Text(
+              joke.text,
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                fontSize: 22.0,
+              ),
             ),
           ),
+                    ),
         )
       ],
     );
@@ -157,7 +164,6 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
   _jokeSlide(UnmodifiableListView<Joke> jokes) {
     return (jokes != null && jokes.isNotEmpty)
         ? PageView.builder(
-            key: textJokeBoundaryKey,
             itemCount: jokes.length,
             controller: _pageController,
             onPageChanged: (index) {

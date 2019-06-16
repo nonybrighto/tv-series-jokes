@@ -17,7 +17,8 @@ class JokeSaveUtil{
 
   saveText(ui.Image image, String fileName) async{
 
-      String name = fileName+'.png';
+      
+      String name = DateTime.now().toString()+'$fileName.png';
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
       String directoryPath = await appDirectoryPath();
@@ -27,7 +28,7 @@ class JokeSaveUtil{
 
   saveImage(String imageUrl, String fileName, extension) async{
        
-       String name = fileName+'.jpg';
+       String name = DateTime.now().toString()+'$fileName.jpg';
        String directoryPath = await appDirectoryPath();
        final cacheManager = DefaultCacheManager();
        File file = await cacheManager.getSingleFile(imageUrl);

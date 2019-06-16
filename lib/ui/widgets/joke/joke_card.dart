@@ -28,15 +28,18 @@ class JokeCard extends StatelessWidget {
         jokeControlled: joke,
         jokeListBloc: jokeListBloc,
         jokeService: JokeService());
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildJokeHeader(context, jokeControlBloc, jokeListBloc),
-          _buildJokeContent(
-              context: context, joke: joke, jokeListBloc: jokeListBloc),
-          _buildJokeFooter(context, jokeControlBloc, joke)
-        ],
+    return RepaintBoundary(
+          key: textJokeBoundaryKey,
+          child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildJokeHeader(context, jokeControlBloc, jokeListBloc),
+            _buildJokeContent(
+                context: context, joke: joke, jokeListBloc: jokeListBloc),
+            _buildJokeFooter(context, jokeControlBloc, joke)
+          ],
+        ),
       ),
     );
   }
@@ -204,12 +207,9 @@ class JokeCard extends StatelessWidget {
   }
 
   _buildTextDisplay(String jokeContent) {
-    return RepaintBoundary(
-      key: textJokeBoundaryKey,
-      child: Container(
-        padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
-        child: Text(jokeContent),
-      ),
+    return Container(
+      padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+      child: Text(jokeContent),
     );
   }
 }
