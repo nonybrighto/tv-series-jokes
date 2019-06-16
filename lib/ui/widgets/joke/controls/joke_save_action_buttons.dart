@@ -5,6 +5,7 @@ import 'package:tv_series_jokes/models/joke.dart';
 import 'package:tv_series_jokes/models/load_state.dart';
 import 'package:tv_series_jokes/ui/widgets/joke/joke_action_button.dart';
 import 'package:tv_series_jokes/utils/joke_save_util.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class JokeSaveActionButton extends StatelessWidget {
 
@@ -30,23 +31,43 @@ class JokeSaveActionButton extends StatelessWidget {
                           selected: false,
                           size: size,
                           onTap: () async {
-                            if (joke.hasImage()) {
-                              jokeControlBloc.saveImageJoke((message) {
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text(message),
-                                ));
-                              });
-                            } else {
-                              jokeControlBloc.saveTextJoke(
-                                  await JokeSaveUtil()
-                                      .textToImage(textJokeBoundaryKey),
-                                  (message) {
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text(message),
-                                ));
-                              });
+                            
+                            PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.storage);
+                            
+                            if(permission !=  PermissionStatus.granted){
+                                  Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.storage]);
+
+                                  if(permissions[PermissionGroup.storage] == PermissionStatus.granted){
+                                        await saveJoke(context, jokeControlBloc);
+                                  }else{
+                                     Scaffold.of(context).showSnackBar(SnackBar(content:Text('Enable permission to save file'), action: SnackBarAction(label: 'OPEN', onPressed: () async{
+                                    await PermissionHandler().openAppSettings();
+                                  },),));
+                                  }
+                            }else{
+                              await saveJoke(context, jokeControlBloc);
                             }
                           });
                     });
+  }
+
+  saveJoke(BuildContext context, JokeControlBloc jokeControlBloc) async{
+
+      if (joke.hasImage()) {
+        jokeControlBloc.saveImageJoke((message) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(message),
+        ));
+        });
+      } else {
+        jokeControlBloc.saveTextJoke(
+          await JokeSaveUtil()
+              .textToImage(textJokeBoundaryKey),
+          (message) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(message),
+        ));
+        });
+      }
   }
 }

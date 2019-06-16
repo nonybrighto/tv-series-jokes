@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^5.0.3
   image: ^2.1.4
   cached_network_image: ^0.8.0
+  permission_handler: ^3.1.0
 
 dev_dependencies:
   mockito: ^4.0.0
