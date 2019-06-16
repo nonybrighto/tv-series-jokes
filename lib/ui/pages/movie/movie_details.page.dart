@@ -158,6 +158,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: Text(
                 (movie.hasFullDetails() ? movie.tmdbDetails.overview : ''),
+                style: TextStyle(color:  Colors.white),
               ),
             ),
             if(movie.firstAirDate != null)_buildPointDetail(
@@ -309,13 +310,13 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                 ? Row(
                     children: <Widget>[
                       Icon(
-                          (movieFollowed) ? Icons.favorite : Icons.file_upload),
+                          (movieFollowed) ? Icons.favorite : Icons.file_upload, color: Colors.white,),
                       SizedBox(
                         width: 10,
                       ),
                       Text(
                         (movieFollowed) ? 'FOLLOWING' : 'FOLLOW',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                       )
                     ],
                   )
