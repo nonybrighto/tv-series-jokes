@@ -87,7 +87,8 @@ class JokeCard extends StatelessWidget {
         User currentUser = currentUserSnapshot.data;
         List<String> menuChoices = ['View Likes', 'View Comments','Delete', 'Report Content'];
         if(currentUser!=null && currentUser.id != joke.owner.id){
-              menuChoices.where((choice) => choice == 'Delete');
+              int index = menuChoices.indexWhere((choice) => choice == 'Delete');
+              menuChoices.removeAt(index);
         }
         return PopupMenuButton<String>(
           icon: Icon(Icons.more_vert),
@@ -118,10 +119,10 @@ class JokeCard extends StatelessWidget {
     );
   }
 
-  _showDeleteDialog(BuildContext context, JokeControlBloc jokeControlBloc){
+  _showDeleteDialog(BuildContext topContext, JokeControlBloc jokeControlBloc){
 
     showDialog(
-        context: context,
+        context: topContext,
         builder: (context) => AlertDialog(
               title: Text('Delete Joke'),
               content: Text('Are you sure you want to delete this joke?'), // get from server
@@ -131,14 +132,14 @@ class JokeCard extends StatelessWidget {
                   onPressed: () async {
                     Navigator.of(context).pop();
                     jokeControlBloc.deleteJoke((message){
-                Scaffold.of(context).showSnackBar(SnackBar(content: Text(message),));
+                       Scaffold.of(topContext).showSnackBar(SnackBar(content: Text(message),));
                   });
                   },
                 ),
                 FlatButton(
                   child: Text('CANCEL'),
                   onPressed: () async {
-                    
+                    Navigator.of(context).pop();
                   },
                 ),
               ],
