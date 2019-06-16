@@ -71,48 +71,54 @@ class _MovieListPageState extends State<MovieListPage> {
       child: Card(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Container(
-          height: 140,
-          padding: EdgeInsets.only(left: 135, top: 10, right: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+                right: 5,
+                top: 5,
+                child: Icon(Icons.favorite, color: (movie.followed)? Theme.of(context).accentColor: Theme.of(context).textTheme.body1.color,),
+            ),
+            Container(
+              height: 140,
+              padding: EdgeInsets.only(left: 135, top: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    movie.name,
-                    style: TextStyle(fontSize: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 17.0),
+                    child: Text(
+                          movie.name,
+                          style: TextStyle(fontSize: 15),
+                        ),
                   ),
-                  Icon(Icons.favorite, color: (movie.followed)? Theme.of(context).accentColor: Theme.of(context).textTheme.body1.color,)
-                ],
-              ),
-              Text(
-                '${movie.jokeCount} jokes',
-                style: TextStyle(color: const Color(0XFFc0c0c0)),
-              ),
-              if(movie.firstAirDate != null) Text(
-                DateFormatter.dateToString(
-                        movie.firstAirDate, DateFormatPattern.wordDate),
-                style: TextStyle(color: const Color(0XFFc0c0c0)),
-              ),
-              Text(
-                '${movie.followerCount} followers',
-                style: TextStyle(color: const Color(0XFFc0c0c0)),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  FlatButton(
-                    child: Text('View Jokes'),
-                    onPressed: () {
-                      gotoJokeListPage(context, pageTitle: movie.name, fetchType: JokeListFetchType.movieJokes, movie: movie);
-                    },
+                  Text(
+                    '${movie.jokeCount} jokes',
+                    style: TextStyle(color: const Color(0XFFc0c0c0)),
+                  ),
+                  if(movie.firstAirDate != null) Text(
+                    DateFormatter.dateToString(
+                            movie.firstAirDate, DateFormatPattern.wordDate),
+                    style: TextStyle(color: const Color(0XFFc0c0c0)),
+                  ),
+                  Text(
+                    '${movie.followerCount} followers',
+                    style: TextStyle(color: const Color(0XFFc0c0c0)),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      FlatButton(
+                        child: Text('View Jokes'),
+                        onPressed: () {
+                          gotoJokeListPage(context, pageTitle: movie.name, fetchType: JokeListFetchType.movieJokes, movie: movie);
+                        },
+                      )
+                    ],
                   )
                 ],
-              )
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );

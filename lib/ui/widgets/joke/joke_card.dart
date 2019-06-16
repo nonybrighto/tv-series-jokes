@@ -65,16 +65,18 @@ class JokeCard extends StatelessWidget {
               : Container(),
         ],
       ),
-      subtitle: Row(children: <Widget>[
-        Text(DateFormatter.dateToString(
-          joke.createdAt, DateFormatPattern.timeAgo)),
-          SizedBox(
-            width: 5,
-          ),
-          ActionChip(label: Text(joke.movie.name, style: TextStyle(fontSize: 10),), padding:  EdgeInsets.all(0), onPressed: (){
-                gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
-          },),
-      ],),
+      subtitle: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: <Widget>[
+          Text(DateFormatter.dateToString(
+            joke.createdAt, DateFormatPattern.timeAgo)),
+            SizedBox(
+      width: 5,
+            ),
+            ActionChip(label: Text(joke.movie.name, style: TextStyle(fontSize: 10),), padding:  EdgeInsets.all(0), onPressed: (){
+          gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
+            },),
+        ],),
       trailing: _buildJokeMenuButton(context, jokeControlBloc, jokeListBloc),
     );
   }
@@ -156,6 +158,7 @@ class JokeCard extends StatelessWidget {
             initialPage: index, jokeListBloc: jokeListBloc, joke: joke);
       },
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           (joke.text != null) ? _buildTextDisplay(joke.text) : Container(),
           (joke.hasImage()) ? _buildImageDisplay(joke.imageUrl) : Container(),

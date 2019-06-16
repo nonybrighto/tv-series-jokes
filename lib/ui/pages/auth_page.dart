@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tv_series_jokes/blocs/auth_bloc.dart';
 import 'package:tv_series_jokes/blocs/auth_page_bloc.dart';
@@ -255,8 +256,9 @@ class _AuthPageState extends State<AuthPage>{
   }
 
   _buildFootDetail({String infoText, String buttonText, Function() onPressed}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      alignment: WrapAlignment.center,
       children: <Widget>[
         Text(infoText),
         FlatButton(
