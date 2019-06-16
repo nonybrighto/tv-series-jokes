@@ -52,34 +52,28 @@ class JokeCard extends StatelessWidget {
       title: Wrap(
         children: <Widget>[
           UsernameText(user: joke.owner, style: TextStyle(fontWeight: FontWeight.bold),),
-          (joke.title != null)
-              ? Wrap(
+           Wrap(
                   children: <Widget>[
                     Icon(
                       Icons.play_arrow,
                       size: 20,
                     ),
-                    Text(
-                      joke.title,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    InkWell(
+                      onTap: (){
+                          gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
+                      },
+                                          child: Text(
+                        joke.movie.name,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     )
                   ],
                 )
-              : Container(),
+              
         ],
       ),
-      subtitle: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: <Widget>[
-          Text(DateFormatter.dateToString(
+      subtitle: Text(DateFormatter.dateToString(
             joke.createdAt, DateFormatPattern.timeAgo)),
-            SizedBox(
-      width: 5,
-            ),
-            ActionChip(label: Text(joke.movie.name, style: TextStyle(fontSize: 10),), padding:  EdgeInsets.all(0), onPressed: (){
-          gotoJokeListPage(context, pageTitle: joke.movie.name, fetchType: JokeListFetchType.movieJokes, movie: joke.movie);
-            },),
-        ],),
       trailing: _buildJokeMenuButton(context, jokeControlBloc, jokeListBloc),
     );
   }
@@ -130,7 +124,7 @@ class JokeCard extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
               title: Text('Delete Joke'),
-              content: Text('Are you sure you want to delete the joke (${joke.title})'), // get from server
+              content: Text('Are you sure you want to delete this joke?'), // get from server
               actions: <Widget>[
                 FlatButton(
                   child: Text('DELETE'),
@@ -185,16 +179,6 @@ class JokeCard extends StatelessWidget {
               ],
             )));
   }
-
-  // _buildImageDisplay(String imageUrl) {
-  //   return SizedBox(
-  //       width: double.infinity,
-  //       child: FadeInImage.assetNetwork(
-  //         fit: BoxFit.fill,
-  //         placeholder: 'assets/images/pl.png',
-  //         image: imageUrl,
-  //       ));
-  // }
   _buildImageDisplay(String imageUrl) {
     return SizedBox(
         width: double.infinity,

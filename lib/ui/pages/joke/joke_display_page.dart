@@ -56,7 +56,7 @@ class _JokeDisplayPageState extends State<JokeDisplayPage> {
         Joke currentJoke = currentJokeSnapshot.data;
         return Scaffold(
           appBar: AppBar(
-            title: Text(currentJoke != null? currentJoke.title : 'Joke'),
+            title: Text('Joke'),
           ),
           backgroundColor: (currentJoke != null && currentJoke.hasImage())?Colors.black: Theme.of(context).scaffoldBackgroundColor,
           body: StreamBuilder<LoadState>(

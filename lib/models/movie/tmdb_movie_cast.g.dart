@@ -36,7 +36,6 @@ class _$TmdbMovieCastSerializer implements StructuredSerializer<TmdbMovieCast> {
         ..add(serializers.serialize(object.profilePath,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 

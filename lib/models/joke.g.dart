@@ -20,9 +20,6 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
-      'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
       'commentCount',
       serializers.serialize(object.commentCount,
           specifiedType: const FullType(int)),
@@ -68,7 +65,6 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
         ..add(serializers.serialize(object.imageUrl,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
@@ -86,10 +82,6 @@ class _$JokeSerializer implements StructuredSerializer<Joke> {
         case 'id':
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
-          break;
-        case 'title':
-          result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
           break;
         case 'text':
           result.text = serializers.deserialize(value,
@@ -138,8 +130,6 @@ class _$Joke extends Joke {
   @override
   final int id;
   @override
-  final String title;
-  @override
   final String text;
   @override
   final int commentCount;
@@ -163,7 +153,6 @@ class _$Joke extends Joke {
 
   _$Joke._(
       {this.id,
-      this.title,
       this.text,
       this.commentCount,
       this.createdAt,
@@ -176,9 +165,6 @@ class _$Joke extends Joke {
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('Joke', 'id');
-    }
-    if (title == null) {
-      throw new BuiltValueNullFieldError('Joke', 'title');
     }
     if (commentCount == null) {
       throw new BuiltValueNullFieldError('Joke', 'commentCount');
@@ -203,7 +189,6 @@ class _$Joke extends Joke {
     if (identical(other, this)) return true;
     return other is Joke &&
         id == other.id &&
-        title == other.title &&
         text == other.text &&
         commentCount == other.commentCount &&
         createdAt == other.createdAt &&
@@ -224,11 +209,7 @@ class _$Joke extends Joke {
                     $jc(
                         $jc(
                             $jc(
-                                $jc(
-                                    $jc(
-                                        $jc($jc(0, id.hashCode),
-                                            title.hashCode),
-                                        text.hashCode),
+                                $jc($jc($jc(0, id.hashCode), text.hashCode),
                                     commentCount.hashCode),
                                 createdAt.hashCode),
                             likeCount.hashCode),
@@ -243,7 +224,6 @@ class _$Joke extends Joke {
   String toString() {
     return (newBuiltValueToStringHelper('Joke')
           ..add('id', id)
-          ..add('title', title)
           ..add('text', text)
           ..add('commentCount', commentCount)
           ..add('createdAt', createdAt)
@@ -270,18 +250,6 @@ class _$JokeBuilder extends JokeBuilder {
   set id(int id) {
     _$this;
     super.id = id;
-  }
-
-  @override
-  String get title {
-    _$this;
-    return super.title;
-  }
-
-  @override
-  set title(String title) {
-    _$this;
-    super.title = title;
   }
 
   @override
@@ -397,7 +365,6 @@ class _$JokeBuilder extends JokeBuilder {
   JokeBuilder get _$this {
     if (_$v != null) {
       super.id = _$v.id;
-      super.title = _$v.title;
       super.text = _$v.text;
       super.commentCount = _$v.commentCount;
       super.createdAt = _$v.createdAt;
@@ -432,7 +399,6 @@ class _$JokeBuilder extends JokeBuilder {
       _$result = _$v ??
           new _$Joke._(
               id: id,
-              title: title,
               text: text,
               commentCount: commentCount,
               createdAt: createdAt,

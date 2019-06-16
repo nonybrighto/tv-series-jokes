@@ -28,7 +28,6 @@ class JokeAddPage extends StatefulWidget {
 class _JokeAddPageState extends State<JokeAddPage>
     implements BlocDelegate<Joke> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _titleController = TextEditingController();
   TextEditingController _textController = TextEditingController();
   TextEditingController _movieController = TextEditingController();
   File _imageToUpload;
@@ -71,20 +70,6 @@ class _JokeAddPageState extends State<JokeAddPage>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      TextFormField(
-                        controller: _titleController,
-                        decoration: InputDecoration(
-                            labelText: 'Title',
-                            hintText: 'Title'),
-                            validator: (value){
-                              if(value.trim().length < 3){
-                                return 'Title should be more than 3 characters';
-                              }
-                            },
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
                       _buildMovieSelectionField(),
                       SizedBox(
                         height: 10.0,
@@ -138,7 +123,6 @@ class _JokeAddPageState extends State<JokeAddPage>
           Map<String, dynamic> jokeUploadDetails = {
               'imageToUpload': _imageToUpload,
               'tmdbMovieId': _selectedTmdbMovieId,
-              'title': _titleController.text,
               'text': _textController.text,
           };
 
@@ -202,8 +186,8 @@ class _JokeAddPageState extends State<JokeAddPage>
       controller: _textController,
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
-          hintText: 'Joke Text\n\n\n',
-          labelText: 'Joke Text',
+          hintText: 'Joke Text(optional)\n\n\n',
+          labelText: 'Joke Text(optional)',
           ),
           validator: (value){
             if(value.trim().isNotEmpty &&  value.trim().length < 10){

@@ -39,7 +39,6 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
         ..add(serializers.serialize(object.owner,
             specifiedType: const FullType(User)));
     }
-
     return result;
   }
 

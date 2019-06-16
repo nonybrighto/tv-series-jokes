@@ -100,7 +100,7 @@ class JokeControlBloc extends BlocBase {
 
     Function(String) saveCallback = details['saveCallback'];
     try {
-      await JokeSaveUtil().saveImage(jokeControlled.imageUrl, jokeControlled.title,
+      await JokeSaveUtil().saveImage(jokeControlled.imageUrl, jokeControlled.id.toString(),
           jokeControlled.getImageExtension());
       saveCallback('Joke has been saved!!');
     } catch (error) {
@@ -116,7 +116,7 @@ class JokeControlBloc extends BlocBase {
 
     Function(String) saveCallback = details['saveCallback'];
     try {
-      await JokeSaveUtil().saveText(jokeImage, jokeControlled.title);
+      await JokeSaveUtil().saveText(jokeImage, jokeControlled.id.toString());
       saveCallback('Joke has been saved!!');
     } catch (error) {
       saveCallback('Failed to save joke!!');
@@ -169,7 +169,6 @@ class JokeControlBloc extends BlocBase {
 
   @override
   void dispose() {
-    print('Joke control disposed for ${jokeControlled.title}');
     _toggleJokeLikeController.close();
     _toggleJokeFavoriteController.close();
     _shareJokeController.close();

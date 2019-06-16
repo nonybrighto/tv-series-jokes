@@ -8,7 +8,7 @@ import 'package:esys_flutter_share/esys_flutter_share.dart';
 class JokeShareUtil{
 
   shareTextJoke(Joke joke){
-    Share.text('(TvSeriesJokes, ${joke.movie.name}) - ${joke.title}', 
+    Share.text('(TvSeriesJokes, ${joke.movie.name})', 
     '${joke.text} - (TvSeriesJokes, ${joke.movie.name})', 'text/plain');
   }
 

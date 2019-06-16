@@ -66,7 +66,6 @@ class _$UserSerializer implements StructuredSerializer<User> {
         ..add(serializers.serialize(object.followingCount,
             specifiedType: const FullType(int)));
     }
-
     return result;
   }
 

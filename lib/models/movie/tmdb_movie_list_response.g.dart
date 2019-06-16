@@ -52,7 +52,6 @@ class _$TmdbMovieListResponseSerializer
         ..add(serializers.serialize(object.previousPage,
             specifiedType: const FullType(int)));
     }
-
     return result;
   }
 

@@ -42,7 +42,6 @@ void main(){
 
     Joke joke =  Joke((b) => b
         ..id = 1
-        ..title = 'user joke $num'
         ..text = 'user Joke'
         ..commentCount = 21
         ..likeCount = 1
@@ -100,7 +99,6 @@ void main(){
           
           Joke joke =  Joke((b) => b
         ..id = 1
-        ..title = 'user joke $num'
         ..text = 'user Joke'
         ..commentCount = 21
         ..likeCount = 1

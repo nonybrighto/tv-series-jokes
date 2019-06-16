@@ -69,7 +69,6 @@ class _$TmdbMovieSerializer implements StructuredSerializer<TmdbMovie> {
         ..add(serializers.serialize(object.credits,
             specifiedType: const FullType(TmdbMovieCredit)));
     }
-
     return result;
   }
 

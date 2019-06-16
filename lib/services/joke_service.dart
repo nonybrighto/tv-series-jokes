@@ -115,7 +115,6 @@ class JokeService {
       String fileName =
           (imageToUpload != null) ? basename(imageToUpload.path) : '';
       Map<String, dynamic> gottenData = {
-        'title': jokeUploadDetails['title'],
         'tmdbMovieId': jokeUploadDetails['tmdbMovieId'],
       }
         ..addAll((imageToUpload != null)

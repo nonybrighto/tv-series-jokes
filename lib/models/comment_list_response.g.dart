@@ -48,7 +48,6 @@ class _$CommentListResponseSerializer
         ..add(serializers.serialize(object.previousPage,
             specifiedType: const FullType(int)));
     }
-
     return result;
   }
 

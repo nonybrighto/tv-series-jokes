@@ -11,7 +11,6 @@ main() {
    String jokeJson = '''{
             "likeCount": 0,
             "id": 1,
-            "title": "This a text joke 3",
             "content": "3 Lorem ipsum is a joke about the joke of all craps and i dont know Lorem ipsum is a joke about the joke of all craps and i dont know Lorem ipsum is a joke about the joke of all craps and i dont know 2",
             "dateAdded": "2019-04-05 17:00:57",
             "commentCount": 0,
@@ -40,6 +39,6 @@ main() {
         }''';
 
 Joke convertedJoke =Joke.fromJson(json.decode(jokeJson));
-    expect(convertedJoke.title, 'This a text joke 3');
+    expect(convertedJoke.id, 1);
   });
 }
