@@ -109,7 +109,7 @@ class JokeService {
       if (imageToUpload != null) {
         newFile = await compressImage(
             imageFile: imageToUpload,
-            width: 450,
+            width: 500,
             imageTemporaryPath: await generateImageTempPath());
       }
       String fileName =

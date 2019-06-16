@@ -10,19 +10,12 @@ Future<File> _resizeImage(Map<String, dynamic> data) async {
     File imageFile = data['imageFile'];
     int width = data['width'];
     String imageTemporaryPath = data['imageTemporaryPath'];
-    // final bytes = await file.readAsBytes();
-    //print("Picture original size: ${bytes.length}");
-
-    // final image = Im.decodeImage(bytes);
-    // final resized = Im.copyResize(image, width: 400);
-    // final resizedBytes = Im.encodeJpg(resized, quality: 90);
-    // print("Picture resized size: ${resizedBytes.length}");
 
     final bytes = imageFile.readAsBytesSync();
     print("Picture original size: ${bytes.length}");
     Im.Image image = Im.decodeImage(bytes);
-    Im.Image resizedImage = Im.copyResize(image, width:width);
-    final resizedBytes = Im.encodeJpg(resizedImage, quality: 85);
+    Im.Image resizedImage = Im.copyResize(image, width:(image.width < width? image.width:width));
+    final resizedBytes = Im.encodeJpg(resizedImage, quality: 98);
     print("Picture resized size: ${resizedBytes.length}");
     File compressedImage = new File(imageTemporaryPath)..writeAsBytesSync(resizedBytes);
     return compressedImage;
