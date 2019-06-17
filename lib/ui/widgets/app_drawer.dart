@@ -198,7 +198,7 @@ class AppDrawer extends StatelessWidget {
 
       return (){
          Share.text('(TvSeriesJokes App)', 'Hey! Checkout some funny TV series jokes on TvSeriesJokes!! '+
-    'https://github.com/nonybrighto/tv-series-jokes', 'text/plain');
+    'get on playstore https://play.google.com/store/apps/details?id=com.nonybrighto.tv_series_jokes', 'text/plain');
 
       };
   }
