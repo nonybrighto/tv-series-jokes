@@ -281,6 +281,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     return GestureDetector(
           onTap: onTap,
           child: Container(
+            color: Colors.white,
             padding: EdgeInsets.only(top:13, bottom:13),
             width: double.infinity,
             child: Column(
