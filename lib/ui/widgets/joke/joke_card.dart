@@ -86,7 +86,7 @@ class JokeCard extends StatelessWidget {
       builder: (context, currentUserSnapshot) {
         User currentUser = currentUserSnapshot.data;
         List<String> menuChoices = ['View Likes', 'View Comments','Delete', 'Report Content'];
-        if(currentUser == null || currentUser.id != joke.owner.id){
+        if(currentUser == null || (currentUser.id != joke.owner.id && !currentUser.isAdmin)){
               int index = menuChoices.indexWhere((choice) => choice == 'Delete');
               menuChoices.removeAt(index);
         }

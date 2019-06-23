@@ -67,7 +67,7 @@ class AuthService {
     try {
       Dio dio = new Dio();
       response = await dio.post(authUrl + 'login',
-          data: {'username': loginDetial, 'password': password});
+          data: {'credential': loginDetial, 'password': password});
       return _handleAuthResponse(response);
     }  catch(error){
         return handleError(error: error, message: 'signing in');  

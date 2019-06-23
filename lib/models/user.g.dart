@@ -66,6 +66,12 @@ class _$UserSerializer implements StructuredSerializer<User> {
         ..add(serializers.serialize(object.followingCount,
             specifiedType: const FullType(int)));
     }
+    if (object.isAdmin != null) {
+      result
+        ..add('isAdmin')
+        ..add(serializers.serialize(object.isAdmin,
+            specifiedType: const FullType(bool)));
+    }
     return result;
   }
 
@@ -116,6 +122,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
           result.followingCount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'isAdmin':
+          result.isAdmin = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
       }
     }
 
@@ -142,6 +152,8 @@ class _$User extends User {
   final int followerCount;
   @override
   final int followingCount;
+  @override
+  final bool isAdmin;
 
   factory _$User([void Function(UserBuilder) updates]) =>
       (new UserBuilder()..update(updates)).build() as _$User;
@@ -155,7 +167,8 @@ class _$User extends User {
       this.following,
       this.followed,
       this.followerCount,
-      this.followingCount})
+      this.followingCount,
+      this.isAdmin})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('User', 'id');
@@ -184,7 +197,8 @@ class _$User extends User {
         following == other.following &&
         followed == other.followed &&
         followerCount == other.followerCount &&
-        followingCount == other.followingCount;
+        followingCount == other.followingCount &&
+        isAdmin == other.isAdmin;
   }
 
   @override
@@ -195,14 +209,16 @@ class _$User extends User {
                 $jc(
                     $jc(
                         $jc(
-                            $jc($jc($jc(0, id.hashCode), username.hashCode),
-                                profilePhoto.hashCode),
-                            email.hashCode),
-                        jokeCount.hashCode),
-                    following.hashCode),
-                followed.hashCode),
-            followerCount.hashCode),
-        followingCount.hashCode));
+                            $jc(
+                                $jc($jc($jc(0, id.hashCode), username.hashCode),
+                                    profilePhoto.hashCode),
+                                email.hashCode),
+                            jokeCount.hashCode),
+                        following.hashCode),
+                    followed.hashCode),
+                followerCount.hashCode),
+            followingCount.hashCode),
+        isAdmin.hashCode));
   }
 
   @override
@@ -216,7 +232,8 @@ class _$User extends User {
           ..add('following', following)
           ..add('followed', followed)
           ..add('followerCount', followerCount)
-          ..add('followingCount', followingCount))
+          ..add('followingCount', followingCount)
+          ..add('isAdmin', isAdmin))
         .toString();
   }
 }
@@ -332,6 +349,18 @@ class _$UserBuilder extends UserBuilder {
     super.followingCount = followingCount;
   }
 
+  @override
+  bool get isAdmin {
+    _$this;
+    return super.isAdmin;
+  }
+
+  @override
+  set isAdmin(bool isAdmin) {
+    _$this;
+    super.isAdmin = isAdmin;
+  }
+
   _$UserBuilder() : super._();
 
   UserBuilder get _$this {
@@ -345,6 +374,7 @@ class _$UserBuilder extends UserBuilder {
       super.followed = _$v.followed;
       super.followerCount = _$v.followerCount;
       super.followingCount = _$v.followingCount;
+      super.isAdmin = _$v.isAdmin;
       _$v = null;
     }
     return this;
@@ -375,7 +405,8 @@ class _$UserBuilder extends UserBuilder {
             following: following,
             followed: followed,
             followerCount: followerCount,
-            followingCount: followingCount);
+            followingCount: followingCount,
+            isAdmin: isAdmin);
     replace(_$result);
     return _$result;
   }

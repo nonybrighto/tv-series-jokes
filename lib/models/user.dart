@@ -26,6 +26,8 @@ abstract class User implements Built<User, UserBuilder> {
   int get followerCount;
   @nullable
   int get followingCount;
+  @nullable
+  bool get isAdmin;
 
   factory User([updates(UserBuilder b)]) = _$User;
   User._();
@@ -58,6 +60,8 @@ abstract class UserBuilder
   int followerCount;
   @nullable
   int followingCount;
+  @nullable
+  bool isAdmin = false;
 
   factory UserBuilder() = _$UserBuilder;
   UserBuilder._();
