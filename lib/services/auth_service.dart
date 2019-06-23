@@ -90,7 +90,7 @@ class AuthService {
       Dio dio = new Dio();
       Options authHeaderOption = await getAuthHeaderOption();
       response = await dio.get(userUrl, options: authHeaderOption);
-      return _handleAuthResponse(response);
+      return _handleFetchAuthenticatedResponse(response);
     }  catch(error){
         return handleError(error: error, message: 'fetching authenticated user');  
     }
@@ -121,23 +121,34 @@ class AuthService {
     }
   }
 
-  _saveUserDetailsToPreference(User user, String userJwtToken, String tokenExpires) async {
+  _saveUserDetailsToPreference(User user) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString(kUserJwtTokenPrefKey, userJwtToken);
-    pref.setString(kUserJwtTokenExpiresPrefKey, tokenExpires);
     pref.setInt(kUserIdPrefKey, user.id);
     pref.setString(kUsernamePrefKey, user.username);
     pref.setString(kUserEmailPrefKey, user.email);
     pref.setString(kUserProfilePhotoPrefKey, user.profilePhoto);
+  }
+  _saveUserTokenDetailsToPreference(String userJwtToken, String tokenExpires) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString(kUserJwtTokenPrefKey, userJwtToken);
+    pref.setString(kUserJwtTokenExpiresPrefKey, tokenExpires);
   }
 
   User _handleAuthResponse(Response response){
       User authenticatedUser = User.fromJson(response.data['user']);
       String userJwtToken = response.data['token'];
       String tokenExpires = response.data['tokenExpires'];
-      _saveUserDetailsToPreference(authenticatedUser, userJwtToken, tokenExpires);
+      _saveUserDetailsToPreference(authenticatedUser);
+      _saveUserTokenDetailsToPreference(userJwtToken, tokenExpires);
       return authenticatedUser;
   }
+  User _handleFetchAuthenticatedResponse(Response response){
+      User authenticatedUser = User.fromJson(response.data);
+      _saveUserDetailsToPreference(authenticatedUser);
+      return authenticatedUser;
+  }
+
+
 
   Future<bool> shouldRefreshToken() async{
       SharedPreferences pref = await SharedPreferences.getInstance();
