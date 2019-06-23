@@ -20,13 +20,9 @@ A Flutter android application for sharing jokes from your favorite tv series wit
 
 ## Screenshots  
 
-<img src="screenshots/login_page.png" width="30%"/>
-<img src="screenshots/home_screen.png" width="30%"/>
-<img src="screenshots/joke_display.png" width="30%"/>
+<img src="screenshots/login_page.png" width="30%"/><img src="screenshots/home_screen.png" width="30%"/><img src="screenshots/joke_display.png" width="30%"/>
 
-<img src="screenshots/movie_list_dark.png" width="28%"/>
-<img src="screenshots/movie_list_light.png" width="28%"/>
-<img src="screenshots/movie_display.png" width="28%"/>
+<img src="screenshots/movie_list_dark.png" width="30%"/><img src="screenshots/movie_list_light.png" width="30%"/><img src="screenshots/movie_display.png" width="30%"/>
 
 N:B This application is configured to work on android devices. I currently don't own a mac :-)
 
