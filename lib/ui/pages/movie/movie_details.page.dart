@@ -141,10 +141,10 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   }
 
   _buildMovieDescriptions(Movie movie) {
-    return Container(
-      width: double.infinity,
-      color: Colors.black,
-      child: Padding(
+    return ConstrainedBox(
+     constraints: BoxConstraints(minHeight: 150),
+      child: Container(
+        color: Colors.black,
         padding:
             const EdgeInsets.only(left: 90, top: 10, bottom: 10, right: 10),
         child: Column(
@@ -280,22 +280,26 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   _countDetailBox(String detail, int count, Function() onTap) {
     return GestureDetector(
           onTap: onTap,
-          child: Column(
+          child: Container(
+            padding: EdgeInsets.only(top:13, bottom:13),
+            width: double.infinity,
+            child: Column(
         children: <Widget>[
-          Text(
-            count.toString(),
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Text(
-            detail,
-            style: TextStyle(fontSize: 12.0, color: Colors.grey),
-          ),
+            Text(
+              count.toString(),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Text(
+              detail,
+              style: TextStyle(fontSize: 12.0, color: Colors.grey),
+            ),
         ],
       ),
+          ),
     );
   }
 
