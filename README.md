@@ -29,12 +29,12 @@ N:B This application is configured to work on android devices. I currently don't
 
 ##dependencies
 
-* esys_flutter_share
-* cached_network_image
-* dio
-* built_value
-* zoomable_image
-* flutter_typeahead
+* [esys_flutter_share](https://pub.dev/packages/esys_flutter_share)
+* [flutter_cached_network_image](https://github.com/renefloor/flutter_cached_network_image)
+* [dio](https://pub.dev/packages/dio)
+* [built_value](https://pub.dev/packages/built_value)
+* [zoomable_image](https://pub.dev/packages/zoomable_image)
+* [flutter_typeahead](https://pub.dev/packages/flutter_typeahead)
 
 ##Mentions
 
