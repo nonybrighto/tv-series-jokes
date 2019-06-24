@@ -278,29 +278,31 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   }
 
   _countDetailBox(String detail, int count, Function() onTap) {
-    return GestureDetector(
-          onTap: onTap,
-          child: Container(
-            color: Colors.white,
-            padding: EdgeInsets.only(top:13, bottom:13),
-            width: double.infinity,
-            child: Column(
-        children: <Widget>[
-            Text(
-              count.toString(),
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
+    return Material(
+          child: InkWell(
+            splashColor: const Color(0XFFfc6b00),
+        onTap: onTap,
+        child: Container(
+              padding: EdgeInsets.only(top:13, bottom:13),
+              width: double.infinity,
+              child: Column(
+          children: <Widget>[
+              Text(
+                count.toString(),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text(
+                detail,
+                style: TextStyle(fontSize: 12.0, color: Colors.grey),
+              ),
+          ],
+        ),
             ),
-            SizedBox(
-              height: 5.0,
-            ),
-            Text(
-              detail,
-              style: TextStyle(fontSize: 12.0, color: Colors.grey),
-            ),
-        ],
       ),
-          ),
     );
   }
 
