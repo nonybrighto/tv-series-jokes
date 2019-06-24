@@ -14,6 +14,7 @@ A Flutter android application for sharing jokes from your favorite tv series wit
 * Take screenshot of joke's card widget
 * Cached network image
 * Download cached image
+* Compress images before upload
 * Share text and images
 * Dark and Light Theme
 * Social Authentication
